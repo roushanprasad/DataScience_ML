@@ -1,0 +1,10 @@
+The data set consists of 100 observations and 10 variables (out of which 8 numeric variables and one categorical variable and is ID) which are as follows:
+
+Radius
+Texture
+Perimeter
+Area
+Smoothness
+Compactness
+Symmetry
+Fractal dimension
