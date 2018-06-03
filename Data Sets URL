@@ -6,3 +6,13 @@ Linear Regression Data Sets:
 1) Airfoil Self Noise: https://archive.ics.uci.edu/ml/datasets/Airfoil+Self-Noise#
 2) Bike Rent Data Set: https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset
 3) Combined Cycle Power Plant: https://archive.ics.uci.edu/ml/datasets/Combined+Cycle+Power+Plant
+
+Decision Trees Random Forest:
+1) Adult Income Dataset: https://archive.ics.uci.edu/ml/datasets/Adult
+2) Bank Note Authentication: http://archive.ics.uci.edu/ml/datasets/banknote+authentication
+3) Skin NoSkin Dataset: https://archive.ics.uci.edu/ml/datasets/Skin+Segmentation#
+4) Bank Marketing Dataset: https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
+5) Space Shuttle Logs Dataset: https://archive.ics.uci.edu/ml/datasets/Statlog+%28Shuttle%29
+6) Occupancy Detection Dataset: https://archive.ics.uci.edu/ml/datasets/Occupancy+Detection+
+7) Wine Quality DataSet: https://archive.ics.uci.edu/ml/datasets/Wine+Quality
+8) Exercise DataSet: https://archive.ics.uci.edu/ml/datasets/Weight+Lifting+Exercises+monitored+with+Inertial+Measurement+Units
