@@ -1,0 +1,87 @@
+======================== Assignment 1 =================================
+Exercise 1:
+If x <- “Good Morning! “, find out the number of characters in X
+
+Exercise 2:
+Consider the character vector x <- c (“Nature’s”, “Best “), how many total characters are there in x?
+
+Exercise 3:
+If x <- c("Nature’s"," At its best ") , how many characters are there in x?
+
+Exercise 4:
+If fname <- "James" and lname <- "Bond", write some R code that will produce the output "James Bond".
+
+Exercise 5:
+If m <- "Capital of America is Washington" then extract the string "Capital of America" from the character vector m.
+
+Exercise 6
+Write some R code to replace the first occurrence of the word "failed" with "failure" in the string 
+"Success is not final, failed is not fatal".
+
+Exercise 7:
+Consider two character vectors:
+Names <- c("John", "Andrew", "Thomas")
+Designation <- c("Manager", "Project Head", "Marketing Head")
+Write some R code to obtain the following output.
+
+	Names 	Designation
+1 	John 	Manager
+2 	Andrew 	Project Head
+3 	Thomas 	Marketing Head
+
+Exercise 8:
+Write some R code that will initialise a character vector with fixed length of 10.
+
+Exercise 9: 
+Write a R program to create a vector of a specified type and length. 
+Create vector of numeric, complex, logical and character types of length 6.
+
+Exercise 10:
+Write a R program to add two vectors of integers type and length 3.
+
+
+
+
+
+======================== Solutions ====================================
+Solution 1: 
+nchar(x)
+
+Solution 2: 
+sum(nchar(x))
+
+Solution 3: 
+sum(nchar(x))
+
+Solution 4:
+paste(fname, lname)
+
+Solution 5: 
+//As we have not introduced higher concepts here, we will manually count and 
+extract the values. However, note that this can also be done with a better 
+and more efficient approach(es).//
+substr(m,start = 1, stop = 18)
+
+Solution 6: 
+s <- "Success is not final, failed is not fatal"
+sub("failed", "fatal", s)
+
+Solution 7: 
+Names <- c("John", "Andrew", "Thomas")
+Designation <- c("Manager", "Project Head", "Marketing Head")
+data.frame(Names, Designation)
+
+Solution 8:
+char.vec <- letters[c(1:10)]
+char.vec
+
+Solution 9:
+x <- vector("numeric", 5)
+c <- vector("complex", 5)
+l <- vector("logical", 5)
+chr <- vector("character", 5)
+
+Solution 10:
+a <- c(1,2,3)
+b <- c(4,5,6)
+a+b

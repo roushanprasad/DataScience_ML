@@ -1,50 +1,50 @@
 ================================= Functions Assignment 1 ===============================
-Problem 1:
-Write a function to swap 2 numbers.
-Function can be names as 'num.swap'
-
-Problem 2: 
-Write a function to swap 2 numbers without using a third variable.
-Function can be named as 'num.swap.short'
-
-Problem 3:
-Write a function to sort a vector of numbers using bubble sort
-Function can be named as 'bubble.sort' 
-
-Problem 4:
-Using the above sort function (bubble.sort), write a function to find the median of values passed as a vector.
-Function can be named as 'my.median'
-
-Problem 5: 
-Write a function to find the maximum value in a vector.
-Function can be names as 'my.max'
-Hint: If you wish, you can use any of the above functions
-
-Problem 6:
-Write a function to find the minimum value in a vector.
-Function can be named as 'my.min' 
-Hint: If you wish, you can use any of the above functions
-
-Problem 7:
-Write a function to find the mean of a vector.
-Function can be named as 'my.mean'
-
-Problem 8:
-Write a function to find the mode(s) of a vector
-Function can be names as 'my.mode'
-
-Problem 9: 
-Write a Function to find the range of a vector
-Function can be named as 'my.range' 
-Hint: You may use the above function if you wish
-
-Problem 10:
-Write a function to find the 'population standard deviation' from the elements of a vector.
-Function can be named as 'my.sd'
-Hint: You may use above functions and inbuilt 'square root' function.
+#Problem 1:
+#Write a function to swap 2 numbers.
+#Function can be names as 'num.swap'
+#
+#Problem 2: 
+#Write a function to swap 2 numbers without using a third variable.
+#Function can be named as 'num.swap.short'
+#
+#Problem 3:
+#Write a function to sort a vector of numbers using bubble sort
+#Function can be named as 'bubble.sort' 
+#
+#Problem 4:
+#Using the above sort function (bubble.sort), write a function to find the median of values passed as a vector.
+#Function can be named as 'my.median'
+#
+#Problem 5: 
+#Write a function to find the maximum value in a vector.
+#Function can be names as 'my.max'
+#Hint: If you wish, you can use any of the above functions
+#
+#Problem 6:
+#Write a function to find the minimum value in a vector.
+#Function can be named as 'my.min' 
+#Hint: If you wish, you can use any of the above functions
+#
+#Problem 7:
+#Write a function to find the mean of a vector.
+#Function can be named as 'my.mean'
+#
+#Problem 8:
+#Write a function to find the mode(s) of a vector
+#Function can be names as 'my.mode'
+#
+#Problem 9: 
+#Write a Function to find the range of a vector
+#Function can be named as 'my.range' 
+#Hint: You may use the above function if you wish
+#
+#Problem 10:
+#Write a function to find the 'population standard deviation' from the elements of a vector.
+#Function can be named as 'my.sd'
+#Hint: You may use above functions and inbuilt 'square root' function.
 
 ================================== Solutions ==================================
-Solution 1:
+#Solution 1:
 my.swap <- function(num1, num2){
   print(paste("Num1 is:", num1))
   print(paste("Num2 is:", num2))
@@ -56,7 +56,7 @@ my.swap <- function(num1, num2){
   print(paste("Num2 is:", num2))
 }
 
-Solution 2:
+#Solution 2:
 my.swap.short <- function(num1, num2){
   print(paste("Num1 is:", num1))
   print(paste("Num2 is:", num2))
@@ -70,7 +70,7 @@ my.swap.short <- function(num1, num2){
   
 }
 
-Solution 3:
+#Solution 3:
 bubble.sort <- function(vector1){
   #print(paste("Vector Before Sorting: ", vector1))
   for (i in 1:length(vector1)) {
@@ -90,7 +90,7 @@ bubble.sort <- function(vector1){
   return(vector1)
 }
 
-Solution 4:
+#Solution 4:
 my.median <- function(vector1){
   vector2 <- bubble.sort(vector1)
   vec.length <- length(vector2)
@@ -108,19 +108,19 @@ my.median <- function(vector1){
   return(med.ele)
 }
 
-Solution 5: 
+#Solution 5: 
 my.max <- function(vector1){
   vector2 <- bubble.sort(vector1)
   return(vector2[length(vector2)])
 }
 
-Solution 6:
+#Solution 6:
 my.min <- function(vector1){
   vector2 <- bubble.sort(vector1)
   return(vector2[1])
 }
 
-Solution 7: 
+#Solution 7: 
 #In R you need not to mention the return statement explicitly. Whichever variable is there in the last statement, it will return that.
 my.mean <- function(vector1){
   my.sum <- 0
@@ -132,14 +132,12 @@ my.mean <- function(vector1){
   print(avg)
 }
 
-Solution 8:
+#Solution 8:
 my.mode <- function(vector1){
   #Step 1: Sort the vector
   vector2 <- bubble.sort(vector1)
-  print(vector2)
   #Step 2: Get Unique values from the above vector
   uniq.vec <- unique(vector2)
-  print(uniq.vec)
   #Step 3: Count No of unique elements
   uniq.count <- vector(length = 0)
   for (i in 1:length(uniq.vec)) {
@@ -151,11 +149,9 @@ my.mode <- function(vector1){
     }
     uniq.count <- c(uniq.count, count)
   }
-  print(uniq.count)
   
   #Step 4: Get max value(s) from count
   max.count <- max(uniq.count)
-  print(max.count)
   #Step 5: Get max element based on unique element max counts
   mode.vec <- vector(length = 0)
   for (i in 1:length(uniq.count)) {
@@ -166,14 +162,14 @@ my.mode <- function(vector1){
   return(mode.vec)
 }
 
-Solution 9:
+#Solution 9:
 my.range <- function(vector1){
   max.value <- my.max(vector1)
   min.value <- my.min(vector1)
   range.value <- max.value - min.value
 }
 
-Solution 10: 
+#Solution 10: 
 #In population standard deviation we divide by 'N'
 #In sample standard deviation we divide by 'N-1'
 my.sd <- function(vector1){
