@@ -1,4 +1,4 @@
-================================= Functions Assignment 1 ===============================
+#================================= Functions Assignment 1 ===============================
 #Problem 1:
 #Write a function to swap 2 numbers.
 #Function can be names as 'num.swap'
@@ -43,7 +43,7 @@
 #Function can be named as 'my.sd'
 #Hint: You may use above functions and inbuilt 'square root' function.
 
-================================== Solutions ==================================
+#================================== Solutions ==================================
 #Solution 1:
 my.swap <- function(num1, num2){
   print(paste("Num1 is:", num1))
