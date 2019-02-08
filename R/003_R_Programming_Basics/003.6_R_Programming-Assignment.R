@@ -71,6 +71,7 @@ my.swap.short <- function(num1, num2){
 }
 
 #Solution 3:
+#Note the inner loop can be looped for length-1 times
 bubble.sort <- function(vector1){
   #print(paste("Vector Before Sorting: ", vector1))
   for (i in 1:length(vector1)) {
@@ -94,9 +95,7 @@ bubble.sort <- function(vector1){
 my.median <- function(vector1){
   vector2 <- bubble.sort(vector1)
   vec.length <- length(vector2)
-  print(paste("Vector Length is:", vec.length))
   temp <- vec.length %% 2
-  print(paste("Zero for Even Nos:", temp))
   mid.value <- vec.length / 2
   if(temp == 0){
     ele1 <- vector2[mid.value]
