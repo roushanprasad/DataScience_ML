@@ -9,7 +9,7 @@
 #Exercise 3:
 #Select the last row in the dataset and print to console.
 
-#Exercise 4:
+#Exercise 4: 
 #Count how many women proceeded to have a third child.
 
 #Exercise 5:
