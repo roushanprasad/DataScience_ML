@@ -22,21 +22,33 @@ head(mtcars)
 =============================== Solutions =================================
 #Solution 1:
 filter(mtcars,mpg>20,cyl==6)
+#or
+mtcars %>% filter(mpg>20,cyl==6)
 
 #Solution 2:
 arrange(mtcars,cyl,desc(wt))
+#or
+df %>% arrange(cyl, desc(wt))
 
 #Solution 3:
 select(mtcars,mpg,hp)
+#or
+df%>%select(mpg,hp)
 
 #Solution 4:
 distinct(select(mtcars,gear))
+#or
+df%>%distinct(gear)
 
 #Solution 5:
 head(mutate(mtcars,Performance=hp/wt))
+#or
+df%>%mutate(Performance = hp/wt)
 
 #Solution 6:
 summarise(mtcars,avg_mpg=mean(mpg))
+#or
+df%>%summarise(mean(mpg))
 
 #Solution 7:
 mtcars %>% filter(cyl==6) %>% summarise(avg_hp = mean(hp))
