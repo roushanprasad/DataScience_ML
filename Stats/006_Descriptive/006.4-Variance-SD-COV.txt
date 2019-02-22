@@ -1,0 +1,73 @@
+============================= Measures of Variablility =====================
+1) You have the annual personal income of 11 people from the USA. You have the mean income from the exercise on mean, median and mode
+a) Decide whether you have to use sample or population formula for the variance
+b) Calculate the variance of their income
+c) Generally, what does this number tell you?
+Annual income
+ $62,000.00 
+ $64,000.00 
+ $49,000.00 
+ $324,000.00 
+ $1,264,000.00 
+ $54,330.00 
+ $64,000.00 
+ $51,000.00 
+ $55,000.00 
+ $48,000.00 
+ $53,000.00 
+
+2) You have the annual personal income of 11 people from the USA and 10 from Denmark. You have the mean income for USA from previous exercises
+a) Decide whether you have to use sample or population formula for the standard deviation and the coefficient of variation
+b) Calculate the standard deviation of income in the USA and in Denmark
+c) Calculate the coefficient of variation of income in the USA and in Denmark
+d) Try to interpret the numbers you got
+Annual income USA		Annual income Denmark
+ $62,000.00 			 € 62,000.00 
+ $64,000.00 			 € 63,000.00 
+ $49,000.00 			 € 76,000.00 
+ $324,000.00 			 € 79,000.00 
+ $1,264,000.00 			 € 67,000.00 
+ $54,330.00 			 € 66,000.00 
+ $64,000.00 			 € 69,000.00 
+ $51,000.00 			 € 68,000.00 
+ $55,000.00 			 € 57,000.00 
+ $48,000.00 			 € 70,000.00 
+ $53,000.00 			 € 67,000.00 
+             
+
+ 
+==================================== SOLUTIONS ====================================
+1) 
+a) Sample formula
+b) Mean:  $189,848.18 
+Variance: $square 133,433,409,536.36 
+c) There is great dispersion between the income of different people in the USA.
+
+2) 
+a) Sample formula
+b) 
+Mean US	 					$189,848.18 						
+Mean Denmark	 			€ 67,636.36 
+Variance US	 				$squared 133,433,409,536.36 			
+Variance Denmark	 		€ squared 37,654,545.45 
+Standard deviation US		$365,285.38 		
+Standard deviation Denmark	€ 6,136.33 
+
+c) Coefficient of var. US	1.92		
+Coefficient of var. Denmark	0.09
+
+d) 
+Denmark is a much more egalitarian country than the USA. 
+Not only the variance is smaller, but also the standard deviation of salaries.
+You can get the feeling that almost all people in the country gravitate around the same income.
+We can further calculate the median income to see if they differ.
+Median US
+According to this sample, the average salary in the US is much higher ( $ 189,848 to € 67,636 )
+However, on the average American earns less than the average Danish, which is evident from the median salary.
+
+Finally, the coefficients of variation of the salaries in the two countries are very different.
+In the USA we have much higher variability of income, evident from the coeffcients of variation. In the USA the value is 1.92, while in Denmark it is 0.09.
+By all means, a coefficient of variation of 1.92 is extremely high, while 0.09 is extremely low. 
+
+Note that we only needed the coefficient of variation, because the currencies we used were different. 
+Had the salaries been in expressed in dollars for both datasets, a comparison of the standard deviations would be sufficient.
