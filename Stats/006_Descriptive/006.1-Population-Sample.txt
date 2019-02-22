@@ -1,0 +1,31 @@
+============================= Population Sample Exercise ========================
+1) A scientist takes a big bucket of water from a lake and counts how many species of bacteria he finds in the bucket. 
+Identify what are the following here: 
+a) Population
+b) Sample
+c) parameter
+d) statistic
+
+2) A school takes a poll to find out what students want to eat at lunch. 70 students are randomly chosen to answer the poll questions. 
+What are the population, the sample, the parameter, and the statistic of this study?
+
+
+3) A researcher was interested in the effectiveness of a given learning program in preparing 100 high school juniors from five different schools for the SAT. 
+What is the sample here?
+What is the population here ?
+================================ Solutions =====================================
+1) 
+a) Population - all species in the lake
+b) Sample - all species in the bucket
+c) Parameter - Number of species in the lake
+d) Statistic - Number of species in the bucket
+
+2) 
+Population - All student in the school
+Sample - 70 Students selected for the poll
+Parameter - Lunch prefered by whole school
+Statistic - Lunch prefered by 70 students
+
+3) 
+Sample - 100 high school juniors from five different schools
+Population - All high school juniors from all schools 

@@ -1,0 +1,116 @@
+============================= Variables/Data Exercise===================
+1) A game involves a circular spinner with eight sections labeled with numbers. Z is the number of the section the spinner lands on.
+Is the random variable Z discrete or continuous?
+
+2) Y is the height of a randomly chosen teenager.
+Is the random variable Y discrete or continuous?
+
+3) Z is the number of cars owned by a randomly chosen pop singer.
+Is the random variable Z discrete or continuous?
+
+4) X is the length of a randomly chosen person's arm.
+Is the random variable X discrete or continuous?
+
+5) Y is the number of articles in a randomly chosen newspaper.
+Is the random variable Y discrete or continuous?
+
+6) Y is the time it took to construct a randomly chosen building.
+Is the random variable Y discrete or continuous?
+
+7) X is the amount of time that a randomly chosen student has spent out of the country.
+Is the random variable X discrete or continuous?
+
+8) X is the weight of fish a randomly chosen fisherman caught last season.
+Is the random variable X discrete or continuous?
+
+9) Z is the number of keys on a randomly chosen keyboard.
+Is the random variable Z discrete or continuous?
+
+10) A coin is flipped. Y is 1 if the coin shows heads and 0 otherwise.
+Is the random variable Y discrete or continuous?
+
+11) Z is the number of calculators in a randomly chosen school.
+Is the random variable Z discrete or continuous ?
+
+12) Discrete data is from qualities that can be: 
+a) Measeured
+b) Counted
+c) Both
+
+13) Continuous data is from qualities that can be
+a) Measeured
+b) Counted
+c) Both
+
+14) Which of these is NOT continuous data:
+a) A person's height each year
+b) The volume of water in a swimming pool each day
+c) Cars finished in a factory each day
+d) A person's weight on each birthday
+
+15) Which of these is NOT discrete data:
+a) Height of a sunflower as measured each day
+b) How many students are absent from school each day
+c) How many widgets a business sell each day
+d) The number of people who drive through a red light each hour during rush hour
+
+16) Daily rainfall is an example of what sort of data:
+a) Discrete
+b) Continuous
+
+17) The distance that a cyclist rides each day is what sort of data:
+a) Discrete 
+b) Continuous
+
+18) The number of times that a cyclist rides over 45 km each month is what sort of data:
+a) Discrete
+b) Continuous
+
+19) The number of oranges produced by my orange tree each year is:
+a) Discrete
+b) Continuous
+
+20) The average size of the orange grown by my tree is:
+a) Continuous
+b) Discrete
+
+21) The combined tonnage (weight) of mail passing each day through the local postal centre is: 
+a) Discrete
+b) Continuous
+
+22) The number of items passing each day through the local postal centre is:
+a) Discrete
+b) Continuous
+
+23) The heights of your classmates.
+a) Discrete
+b) Continuous
+
+24) Age of a person
+a) Discrete
+b) Continuous
+============================= Solutions ==========================
+1) Discrete
+2) Continuous
+3) Discrete
+4) Continuous
+5) Discrete
+6) Continuous
+7) Continuous
+8) Continuous
+9) Discrete
+10) Discrete
+11) Discrete
+12) Counted
+13) Measured
+14) c
+15) a 
+16) Continuous
+17) Continuous
+18) Discrete
+19) Discrete
+20) Continuous
+21) Continuous
+22) Discrete
+23) Continuous
+24) Continuous

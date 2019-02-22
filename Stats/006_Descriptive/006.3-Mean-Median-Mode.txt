@@ -1,0 +1,32 @@
+============================= Measure of Central Tendencies =====================
+1) You have a sample of 11 people and their personal annual income. 
+ $62,000.00 
+ $64,000.00 
+ $49,000.00 
+ $324,000.00 
+ $1,264,000.00 
+ $54,330.00 
+ $64,000.00 
+ $51,000.00 
+ $55,000.00 
+ $48,000.00 
+ $53,000.00 
+Calculate the mean, median and mode
+
+2) Find mode of the following: 8,10,10,10,6,7,8
+
+3) What is the median of the following numbers?
+10, 6, 4, 4, 6, 4, 1
+
+4) What is the mean of the following numbers?
+8, 10, 10, 10, 6, 7, 8
+====================== Solutions ===================
+1)	Mean	 $189,848.18 
+	Median	 $55,000.00 
+	Mode	 $64,000.00 
+
+2) 10
+
+3) 4
+
+4) 8.42
