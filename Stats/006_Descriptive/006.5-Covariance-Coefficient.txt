@@ -1,0 +1,51 @@
+==================== Covaraince & Coefficient of Correlation ============
+1) Given the Housing data, find the covariance and Correaltion Coefficient:
+	Size(ft.)	Price ($)
+	650	 		772,000 
+	785	 		998,000 
+	1200	 	1,200,000 
+	720	 		800,000 
+	975	 		895,000 
+	
+Mean(Size) = 866
+Mean(Price) = 933000
+Std Dev (Size) = 222
+Std Dev (Price) = 173,615
+
+Covaraince(Size, Price) 
+= 133965000/(5-1)
+= 33491250
+
+Linear Correlation Coefficient (r):
+r = 0.8689
+r ~ 0.87
+
+2) You are given data on the SAT scores from the correlation exercise.
+Calculate the correlation coefficient of the two datasets.
+Comment on the strength of the correlation between the two datasets
+Writing		Reading
+344			378
+383			349
+611			503
+713			719
+536			503
+
+Solution: 
+Mean (Writing): 517
+Mean (Reading): 490
+
+(x-x(bar))*(y-y(bar))
+19,490.16 
+19,004.16 
+1,179.36 
+44,714.16 
+234.36 
+
+Sum[(x-x(bar))*(y-y(bar))] = 84,622.20 
+Sample Size = 5
+Covaraince = 21,155.55 
+Correlation coefficient = 0.94
+
+Comment: 0.94 is extremely close to 1, therefore there is a very strong positive correlation between the two datasets
+
+
