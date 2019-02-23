@@ -29,6 +29,11 @@ library(dplyr)
 library(ggplot2)
 library(ggplot2movies)
 df <- sample_n(movies, 1000)
+View(df)
+pl <- ggplot(df, aes(rating))
+pl2 <- pl + geom_histogram()
+print(pl2)
+
 
 #Problem 4: 
 #In the above problem, change the binwidth/bins to less so that you have more finer view of the details.
