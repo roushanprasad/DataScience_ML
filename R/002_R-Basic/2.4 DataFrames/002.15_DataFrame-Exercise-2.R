@@ -35,7 +35,7 @@
 #Exercise 4
 #Create a simple data frame from 3 vectors. Order the entire data frame by the first column.
 #age <- c(45:41, 30:33)
-#class <- letters[1:9]
+#class1 <- letters[1:9]
 #grade <- round(rnorm(n = 9, mean = 45,sd = 2 ))
 
 #Exercise 5
