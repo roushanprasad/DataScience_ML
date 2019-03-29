@@ -21,6 +21,16 @@ citation('data.table')
 data.table1 <- setDT(df1)
 data.table1 <- setDT(list1)
 
+#Important Note: 
+#setDT is call by reference. i.e. it does not create any copy
+#e.g. Once you load the data.table library and call the setDT() method 
+#class(mtcars): it gives data.frame
+#df <- mtcars	(Reference made for mtcars dataframe)
+#setDT(df)		(Reference is passed to set as a data table)
+#class(mtcars): It gives data.table as well as data.frame
+#mtcars itself becomes the data.table 
+
+
 #1.2: using as.data.table() - Data table package
 #You can pass any type of appropriate object into it
 data.table1 <- as.data.table(matrix1/dataframe1)
@@ -46,6 +56,7 @@ hflights <- as.data.table(hflights)
 #--------------- Indexing & Slicing ---------------
 #This differs a little from data frame access methods
 #1. Using list():
+hflights[1:3, 4:7]
 hflights[,list(Year, DepDelay)]
 hflights[1:3,list(Year, DepDelay)]
 #2 Using '.' operator:
