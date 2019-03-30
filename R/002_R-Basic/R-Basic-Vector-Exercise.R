@@ -27,4 +27,4 @@
 #Use the over.23 vector to filter out the stock.prices vector and only return the day a
 #nd prices where the price was over $23
 
-#Use a built-in function to find the day the price was the highest
+#Use a built-in function to find the highest price
