@@ -28,6 +28,19 @@ all(x %in% y)
 a <- c(1,5)
 b <- c(1,2,3,4,5,6)
 all(a %in% b)
+#Important Note: If you are checking for subset, you can use all() to find 
+#subset in set. However if you want to check wheter a vector (not set) is a 
+#subvector (or kind of subset) of any other vector, then you should use isin()
+#as all() function doesnot give correct result for repeated elements in vector.
+#Note that I say repeated values in 'vector' and not in 'set' as set does not 
+#deal with repreated values in it
+#e.g.
+x <- 1:10
+y <- c(3,3,7)
+all(y %in% x) #gives TRUE, because it does not consider 3 as two different 
+#elements
+#isin() is from package 'prob'
+isin(x,y)     #gives FALSE, because 3 is not present twice in x
 
 #6. Possible Subsets: Number of possible subsets of size k, choosen 
 #from a set of size n
