@@ -1,0 +1,263 @@
+﻿===============================================================================================
+Discrete 						R name 		Parameters
+===============================================================================================
+Binomial 						binom 		n = number of trials; 
+											p = probability of success for one trial
+Geometric 						geom 		p = probability of success for one trial
+Hypergeometric 					hyper 		m = number of white balls in urn; 
+											n = number of black balls in urn; 
+											k = numberof balls drawn from urn
+Negative binomial (NegBinomial) nbinom 		size = number of successful trials; 
+											either prob = probability of successful trial
+											or mu = mean
+Poisson 						pois 		lambda = mean
+
+===============================================================================================
+Continuous 				R name 		Parameters
+===============================================================================================
+Beta 					beta 		shape1; shape2
+Cauchy 					cauchy 		location; scale
+Chi-squared (Chisquare) chisq 		df = degrees of freedom
+Exponential 			exp 		rate
+F 						f 			df1 and df2 = degrees of freedom
+Gamma 					gamma 		rate; either rate or scale
+Log-normal (Lognormal) lnorm 		meanlog = mean on logarithmic scale;
+									sdlog = standard deviation on logarithmic scale
+Logistic 				logis 		location; scale
+Normal 					norm 		mean; sd = standard deviation
+Student’s t (TDist) 	t 			df = degrees of freedom
+Uniform 				unif 		min = lower limit; max = upper limit
+Weibull 				weibull 	shape; scale
+Wilcoxon 				wilcox 		m = number of observations in first sample;
+
+
+#TO get the help regarding Normal Distribution: 
+> ?Normal
+
+#Some distributions have names that don’t work well with the help command, 
+such as “Student’s t”. They have special help names, as noted in Tables above: 
+NegBinomial,Chisquare, Lognormal, and TDist. 
+Thus, to get help on the Student’s t distribution,use this:
+> ?TDist
+
+#There are many other distributions implemented in other packages
+https://cran.r-project.org/web/views/Distributions.html
+The 'SuppDists' package is part ofthe R base, and it includes ten supplemental distributions. 
+The 'MASS' package, which is also part of the base, provides additional support for distributions, such as maximumlikelihood
+fitting for some common distributions as well as sampling from a multivariate Normal distribution.
+
+#========================= Combinatorics ====================================
+n Choose k
+#Lets say, You want to calculate the number of combinations of n items taken k at a time.
+> choose(n, k)
+
+# How many ways can we select 3 items from 5 items?
+> choose(5,3)
+
+# How many ways can we select 30 items from 50 items?
+> choose(50,30)
+[1] 4.712921e+13
+
+#These numbers are also known as binomial coefficients.
+
+---------------------- Generating Combinations ----------------------
+#You want to generate all combinations of n items taken k at a time.
+#We can use combn(1:5,3) to generate all combinations of the numbers 1 through 5 taken
+three at a time:
+#combn(items, k)
+> combn(1:5,3)
+
+#The function is not restricted to numbers. We can generate combinations of strings,too. Here are all combinations of five treatments taken three at a time:
+> combn(c("T1","T2","T3","T4","T5"), 3)
+
+============================= Generating Random Numbers ======================================
+#You can generate 'n' random numbers between 0 and 1 using: 
+> runif(1) #r-uniform
+> runif(5)
+> runif(5, min = 1, max = 10)	#Uniform variate between 1 and 10
+
+#R can generate random variates from other distributions, however. For a given distribution,
+the name of the random number generator is “r” prefixed to the distribution’s
+abbreviated name (e.g., rnorm for the Normal distribution’s random number generator).
+
+> rnorm(5, mean = 10, sd=1.5)	#Five Standard Normal variates
+> rbinom(5, size=10, prob=0.5)	#Five binomial variates 
+> rpois(1, lambda=10)			#One Poisson variate
+
+#Explore the parameters for these functions in the Documentation
+
+#Random Variate: 
+Suppose X is a random variable which stands for the outcome of tossing a fair dice. So X can take value from 1 through 6 with equal probability of 1/6. Now you actually toss a dice and get a number 4. This number is a particular outcome of X, and thus a random variate. If you toss again, you may get another different value.
+
+----------- Some Powerful experimentations: 
+#You can generate three normal random values drawn from distributions with means of −10, 0, and +10, respectively (all distributions have a standard deviation of 1.0):
+> rnorm(3, mean=c(-10,0,+10), sd=1)
+
+#The next example calculates 100 draws of a normal variate whose mean is itself randomly distributed and with hyperparameters of μ = 0 and σ = 0.2:
+> means <- rnorm(100, mean=0, sd=0.2)
+> rnorm(100, mean=means, sd=1)
+
+------------- Generating reproducable Random Values -----------------
+#If you want to generate a sequence of random numbers, but you want to reproduce the
+same sequence every time your program runs: 
+
+#You can use seed. It sets the random number generator to a known state
+> set.seed(666)		#Or use any positive Integer
+
+> set.seed(100)
+> runif(10)
+#Note: You have set seed every time before generating random values
+#Ideally, you should not set seed, because as you set seed, you freeze the your sequence of random numbers and thus removing the source of randomness that is sometimes critical to some algorithms. So, think twice before setting seed.
+
+========================== Sampling =======================================
+To sample values, i.e. to randomly n items from a vector: 4
+> sample(vec, n)		#vec is a vector, n is number of elements you wish to sample/take out
+#e.g.
+> sample(v1 <- runif(10, min = 1, max = 10), 5)
+
+#Elements are randomly selected, you will get different samples each time.
+#To get the same samples each time, you need to set seed each time.
+> set.seed(100)
+> sample(v1 <- runif(10, min = 1, max = 10), 5)
+
+#The sample function normally samples without replacement, meaning it will not select
+the same item twice. Some statistical procedures require sampling with replacement, which means that one item can appear multiple times in the sample. 
+Specify replace=TRUE to sample with replacement.
+
+> sample(v1 <- runif(10, min = 1, max = 10), 5, replace = TRUE)
+#Howerver as it is random, you may or may not get the same item twice in a sample
+
+=============================== Generating Random Sequences ============================
+#Lets say, You want to generate a random sequence, such as a series of simulated coin tosses or
+a simulated sequence of Bernoulli trials.
+
+#Use the sample function. Sample from the set of possible values, and set replace=TRUE:
+#Syntax is: sample(set, n, replace=TRUE)
+#e.g.
+> sample(c("H","T"), 10, replace=TRUE)
+
+#Note: 
+#The sample function randomly selects items from a set. It normally samples without replacement, which means that it will not select the same item twice. 
+#With replace=TRUE, however, sample can select items over and over; this allows you to generate long, random sequences of items.
+
+#Try setting 'replace=FALSE', You get an error; which makes sense: 
+> sample(c("H","T"), 10, replace=F)
+
+#Example: Generate a sequence of 20 Bernoulli trials—random successes or failures. We use TRUE to signify a success:
+> sample(c(FALSE,TRUE), 20, replace=TRUE)
+
+#Do you recall the skydiver without the parachute example ?
+#You Bernoulli distribution need not always to be uniform, like in case of a fair coin, its 0.5 for both Heads and Tails.
+#You can bias the sample by setting the probability to generate non uniform probability Bernoulli Distribution
+#We set the probability of FALSE to be 0.2 and the probability of TRUE to 0.8:
+> sample(c(FALSE,TRUE), 20, replace=TRUE, prob=c(0.2,0.8))
+
+#The result looks clearly bias towards TRUE
+
+============================ Generating Permutations ===========================================
+#Say, we want to arrange all the elements from a vector in a random order: 
+> vector1 <- 1:20
+> sample(vector1)
+
+#Note: 
+#The random arrangement is done with each element taken exactly once (replace=FALSE)
+#sample(v) is equivalent to sample(v, size=length(v), replace=FALSE)
+#Try this: 
+> sample(vector1, size = 5, replace = T)
+
+=================== Calculating Probabilities Discrete Distributions ===========================
+#Suppose we have a binomial random variable X over 10 trials, where each trial has a success probability of 1/2. Then we can calculate the probability of observing x = 7 by calling dbinom:
+
+> dbinom(7, size=10, prob=0.5)
+
+#Important Note: R calls dbinom the 'density function'.However the textbooks call it the 'probability mass function' or the 'probability function'. 
+#This is just for the R naming convenience. Calling it a 'density function' keeps the terminology consistent between discrete and continuous distributions.
+
+-------------------- Cumulative Probability -----------------------
+#The cumulative probability, P(X ≤ x), is given by the distribution function, which is sometimes called the 'cumulative probability function'.
+
+Hence Cumulative probability for x=7 (i.e. P(X≤7)):
+> pbinom(7, size=10, prob=0.5)
+
+#------ Multiple Cumulative Frequency ------------------------------
+#You can get the multiple cumulative frquencies by passing multiple values using combine function:
+#Hence Cumulative frequency of 3 and 7 (i.e.P(X≤7) and P(X≤3)) is: 
+> pbinom(c(3,7), size=10, prob=0.5)
+
+Here are the density functions and distribution functions for some common discrete distributions:
+===================================================================================================
+Distribution 		Density function: P(X = x) 		Distribution function: P(X ≤ x)
+===================================================================================================
+Binomial 			dbinom(x, size, prob) 			pbinom(x, size, prob)
+Geometric 			dgeom(x, prob) 				pgeom(x, prob)
+Poisson 			dpois(x, lambda) 			ppois(x, lambda)
+
+--------------------- Survival/survivor Function ------------------------------
+#The complement of the cumulative probability is the survival function, P(X > x). 
+#All of the distribution functions let you find this right-tail probability simply by specifying lower.tail=FALSE:
+#To find the probability of X > 7: 
+> pbinom(7, size=10, prob=0.5, lower.tail=FALSE)
+
+#Or: Alternatively, you can subtract the Cumulative Probability from '1' which gives you the same result
+> 1 - pbinom(7, size=10, prob=0.5, lower.tail=FALSE)
+
+#Thus the probability of observing X > 7 is about 0.055.
+
+#-------------- Cumulative Frequency within Intervals --------------------------
+#The interval probability, P(x1 < X ≤ x2), is the probability of observing X between the limits x1 and x2. 
+#It is simply calculated as the difference between two cumulative probabilities:
+#P(X ≤ x2) − P(X ≤ x1). Here is P(3 < X ≤ 7) for our binomial variable:
+
+> pbinom(7,size=10,prob=0.5) - pbinom(3,size=10,prob=0.5)
+
+#Alternatively, you can use the 'diff()' function to get the same result
+> diff(pbinom(c(3,7), size=10, prob=0.5))
+
+
+========================= Calculating Probabilities Continuous Distributions =====================
+#Lets say, We want to calculate the 'distribution function (DF)' or 'cumulative distribution function(CDF)' for a continuous random variable.
+
+#Some Continuous Distribution Functions
+=====================================================
+Distribution 		Distribution function: P(X ≤ x)
+=====================================================
+Normal 				pnorm(x, mean, sd)
+Student’s t 		pt(x, df)
+Exponential 		pexp(x, rate)
+Gamma 				pgamma(x, shape, rate)
+Chi-squared (χ2) 	pchisq(x, df)
+
+
+#Example: Calculate the probability that a man is shorter than 66 inches, assuming that men’s heights are normally distributed with a mean of 70 inches and a standard deviation of 3 inches.
+#Mathematically speaking, we want P(X ≤ 66) given that X ~ N(70, 3):
+> pnorm(66, mean=70, sd=3)
+
+------------ Survival/survivor Function P(X > x) ---------------
+#Just as for discrete probabilities, the functions for continuous probabilities use lower.tail=FALSE to specify the survival function, P(X > x).
+
+#Hence Probability of height greater than 66
+> pnorm(66, mean=70, sd=3, lower.tail = F)
+
+#Alternatively you can subtract the probability from 1 to get the same result
+> 1 - pnorm(66, mean=70, sd=3)
+
+------------- Probability within an Interval -----------------------
+#Also like discrete probabilities, the interval probability for a continuous variable, 
+#P(x1 <X < x2), is computed as the difference between two cumulative probabilities: 
+#P(X <x2) − P(X < x1). 
+#Probability that the height of man is between 76 and 55 inches:
+> pnorm(76, mean=70, sd=3) - pnorm(55, mean=70, sd=3)
+
+
+========================== Plot Density Function ==================================
+#Lets say, You want to plot the density function of a probability distribution.
+
+> x <- seq(from=-3, to=+3, length.out=100)
+> plot(x, dnorm(x))
+
+#Example:
+> x <- seq(from=0, to=6, length.out=100)
+> ylim <- c(0, 0.6)
+> plot(x, dnorm(x,mean=3,sd=1), main="Normal", type='l', ylim=ylim)
+> plot(x, dnorm(x,mean=3,sd=1), main="Normal", type='h', ylim=ylim)
+ss
