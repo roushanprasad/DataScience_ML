@@ -1,0 +1,146 @@
+============
+library(prob)
+
+#generates results for single tosscoin
+tosscoin(1)
+
+#generates results for two tosscoin
+tosscoin(2)
+
+#To get the outcomes of rolldie
+rolldie(1)
+rolldie(2)	
+
+############################ Probability Distributtion ###############################
+#=============== Discrete Uniform ===============
+#Example: Probability Distribution of rolling 1 dice.
+library(prob)
+S <- rolldie(1, makespace = T)
+plot(S$X1, S$probs, type='h', lwd=5, col='blue', xlab='Events', ylab='Probability')
+
+#=============== Discrete Non-Uniform ===========
+#Example: Probability Distribution of rolling 2 die
+v1 <- 2:12
+v2 <- c(0.03,0.06,0.08,0.11,0.14,0.17,0.14,0.11,0.08,0.06,0.03)
+plot(v1,v2,type="h", lwd=5,col="blue",ylab="Probability", xlab='Events')
+
+#=============== Continuous Uniform =============
+#Example: Let's say you are throwing dart every 0.02 second (x)
+#from a machine to a dart board, assuming the machine is 
+#perfect, it hits the dart board everytime (y).
+x=seq(1,5,length=200)
+y=rep(1,200)
+plot(x,y,type="l",lwd=2,col="red",ylab="Probability", xlab='Dart thrown every 0.2 second')
+polygon(c(1,x,5),c(0,y,0),col="lightgray",border=NA)
+
+#================= Binomial Distribution =========
+#This is Discrete Non-Uniform
+#dbinom() is a function that gives the probability
+#i.e. the probability mass function of 
+#binomial random variable (single as well as cumulative)
+
+#Example1: Single Point Probability:
+#Suppose a die is tossed 5 times. 
+#What is the probability of getting exactly two Fours ?
+#Solution:
+#n = 5,	k  = 2, 	p = 1/6
+#Binomial Probability = 5 Choose 2 * (1/6) 5 * (1-1/6) 5-2  = 0.161
+#This can be done with R as follows: 
+#first param = k, second=n, third=p
+dbinom(2,5,1/6)
+
+#Example 2: Cumulative Probability:
+#Find the probability of getting 45 or fewer Heads in 100 toss of a coin
+#n = 100, k = 45, p=0.5
+#P(X <= 45) = P(X=0) + P(X=1) + P(X=2) + ……………. + P(X=45) = 0.184
+#This can be done in R as follows:
+sum(dbinom(0:45, 100, 0.5)) 
+#Output: 0.1841008
+#For probability of 100 or less out of 100 toss: 
+#Probability sum always equals to 1, hence below will give 1
+sum(dbinom(0:100, 100, 0.5))
+#----- Direct Way -------
+pbinom(45, 100, 0.5)  
+#Output: 0.1841008
+
+#Plotting
+#For probability of 45 or less out of 100 toss
+plot(dbinom(0:45, 100, 0.5),pch=4,col=2, xlab='Sample Space', ylab='Probabilities')
+#For probability of 100 or less out of 100 toss
+plot(dbinom(0:100, 100, 0.5),pch=4,col=2, xlab='Sample Space', ylab='Probabilities')
+
+#If you wish to plot a smooth curve across it, then use below code
+lines(0:100,dbinom(0:100, 100, 0.5), col=3)
+
+
+#============ Bernoulli Distribution ============
+#Discrete Non-Uniform - Single Trial only
+#Example: Lets say, a person jumps from a plane with no parachute
+#if he is alive -> 1, if dead -> 0
+#Probability of landing alive (though not safe and sound) -> 0.05
+#Probability of landing and dead -> 0.95
+x=c(0,1)
+y=c(0.3,0.7)
+plot(x,y,type="h",xlim=c(-1,2),ylim=c(0,1),lwd=5,col="blue",ylab="p")
+points(x,y,pch=16,cex=2,col="dark red")
+
+#============ Poisson Distribution ===============
+#dpois() is the Probability Mass Function - (e.g. 20 cars per minute)
+#This means the probability that the random variable will be within some range
+
+#ppois() is the Cumulative Probability Function - (e.g. 17 cars or more) 
+#This means the probability that the random variable will be lower than or equal to a value.
+
+#Example1: If there are 12 cars crossing a bridge per minute on average, 
+#find the probability of having seventeen or more cars crossing the bridge in a particular minute
+#Solution:
+#To calculate this,we need to calculate the probability of 16 or less cars 
+#in upper tail i.e. lower.tail=False (making lower tail false)
+#if not made false, then it will give the probability of 16 or less cars and not 17 or more
+#mean = 12 (given in problem)
+ppois(16, lambda = 12, lower.tail=FALSE)
+#Thus, If there are twelve cars crossing a bridge per minute on average, 
+#the probability of having seventeen or more cars crossing the bridge 
+#in a particular minute is 10.1%.
+
+#Example2: The  mean number of people arriving per hour at a shopping center is 18.
+#Find the probability that the number of customers arriving in an hour is 20.
+dpois(20, lambda = 18)
+
+#Plotting
+#Suppose that I have a Poisson distribution with mean of 6. 
+#I would like to plot a probability mass function that includes an 
+#overlay of the approximating normal density
+plot(0:20, dpois( x=0:20, lambda=6 ), xlim=c(-2,20))
+normden <- function(x){dnorm(x, mean=6, sd=sqrt(6))}
+curve(normden, from=-4, to=20, add=TRUE, col="red")
+
+#============== Normal Distribution =======================
+#dnorm(x, mean, sd): Probability Density Function: dnorm(0, 0, .5)
+#Gives height of the probability distribution at a point 
+#for a given mean and standard deviation
+
+#pnorm(q, mean, sd): Cumulative Distribution Function: pnorm(1.96, 0, 1)
+#Gives the area under the standard normal curve to the left of 1.96, i.e. ~0.975
+
+#qnorm(p, mean, sd): qnorm(0.975, 0, 1)
+#takes the probability value and gives a number whose cumulative value matches the probability value
+
+#rnorm(n, mean, sd): rnorm(1000, 3, 0.25)
+#generate random numbers whose distribution is normal
+
+#Plotting1: Frequency Distribution
+randomSet <- rnorm(1000,0,1)
+hist(randomSet, main="Random draws from Std Normal", xlim=c(-4,4))
+
+#Plotting2: Density Function
+x = seq(-3, 3, 0.1)
+plot(x = x, y = dnorm(x), type="l", bty="n", ylab='Probability Distribution')
+
+#Plotting3: Cumulative Distribution Function
+z = seq(-3, 3, 0.1)
+plot(z, pnorm(z), type="l")
+
+#============== Standard Normal Distribution ==================
+#Everything is same as normal distribution just replace
+#mean = 0 and standard deviation=1
