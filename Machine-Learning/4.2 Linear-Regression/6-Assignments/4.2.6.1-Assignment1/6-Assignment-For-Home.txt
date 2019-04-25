@@ -1,0 +1,13 @@
+This is the moment where you really learn.
+
+Take the model we created as a basis and try to improve it.
+
+One of the biggest changes will be observed when you include the 'Model' feature we dropped in the beginning.
+
+Here are some other suggestions:
+
+-> Perform feature selection
+
+-> Create a regression where 'Price' is not transformed
+
+-> Deal with the outliers in a different way
