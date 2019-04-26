@@ -21,6 +21,7 @@ install.packages('nycflights13',repos = 'http://cran.us.r-project.org')
 #Use the library
 library(nycflights13)
 summary(flights)
+summary(mtcars)
 
 # Notice how large the data frame is:
 dim(flights)
@@ -41,14 +42,19 @@ head(flights[flights$month == 11 & flights$day == 3 & flights$carrier == 'AA', ]
 slice(flights, 1:10)
 
 #3 arrange():
-#arrange() works similarly to filter() except that instead of filtering or selecting rows, it reorders them. It takes a data frame, and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
+#arrange() works similarly to filter() except that instead of filtering or selecting rows, it reorders them. 
+#It takes a data frame, and a set of column names (or more complicated expressions) to order by. 
+#If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 head(arrange(flights,year,month,day,air_time))
 
 #You can add desc() to arrange in descending order:
 head(arrange(flights,desc(dep_delay)))
 
 #4 select():
-#Often you work with large datasets with many columns but only a few are actually of interest to you. select() allows you to rapidly zoom in on a useful subset using operations that usually only work on numeric variable positions:
+#Often you work with large datasets with many columns but only a few are 
+#actually of interest to you. 
+#select() allows you to rapidly zoom in on a useful subset using operations 
+#that usually only work on numeric variable positions:
 head(select(flights,carrier))
 
 #5 rename()
@@ -60,7 +66,8 @@ head(rename(flights,airline_car = carrier))
 distinct(select(flights,carrier))
 
 #7 mutate()
-#Besides selecting sets of existing columns, it’s often useful to add new columns that are functions of existing columns. This is the job of mutate():
+#Besides selecting sets of existing columns, 
+#it's often useful to add new columns that are functions of existing columns. This is the job of mutate():
 head(mutate(flights, new_col = arr_delay-dep_delay))
 
 #8 transmute()
@@ -68,7 +75,9 @@ head(mutate(flights, new_col = arr_delay-dep_delay))
 head(transmute(flights, new_col = arr_delay-dep_delay))
 
 #9 summarise()
-#You can use summarise() to quickly collapse data frames into single rows using functions that aggregate results. Remember to use na.rm=TRUE to remove NA values.
+#You can use summarise() to quickly collapse data frames into single rows 
+#using functions that aggregate results. 
+#Remember to use na.rm=TRUE to remove NA values.
 summarise(flights,avg_air_time=mean(air_time,na.rm=TRUE))
 
 #10 sample_n() and sample_frac()
