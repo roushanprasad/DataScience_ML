@@ -1,0 +1,742 @@
+WEBVTT
+
+00:00:00.270 --> 00:00:02.920
+Hello and welcome to this art tutorial.
+
+00:00:03.090 --> 00:00:08.180
+Previously we implemented the kernel as VM in Python and now we're going to do it on our.
+
+00:00:08.490 --> 00:00:12.960
+So for those of you who haven't checked the Python tutorials and Colonel SVM I can't wait to show you
+
+00:00:12.960 --> 00:00:14.130
+the results.
+
+00:00:14.160 --> 00:00:18.870
+It's going to be something you'll definitely see how the kernel as class very you can be a powerful
+
+00:00:18.870 --> 00:00:24.150
+classifier especially in our situation where the data set is not linearly separable.
+
+00:00:24.150 --> 00:00:30.540
+Here you are going to see how it can manage to overcome this nonlinear inseparability and classify most
+
+00:00:30.540 --> 00:00:33.630
+of our users of the social network correctly.
+
+00:00:33.630 --> 00:00:39.140
+So let's make this kernel SVM classify right now and quickly look at the results.
+
+00:00:39.150 --> 00:00:42.680
+So as usual we are going to start by setting a working directory.
+
+00:00:42.840 --> 00:00:46.960
+So right now I'm on my desktop and going to my machinery folder.
+
+00:00:47.280 --> 00:00:50.820
+Part 3 classification section kernel as VM.
+
+00:00:50.850 --> 00:00:56.730
+And here we are make sure that you have the social network at you find your folder and if that's the
+
+00:00:56.730 --> 00:01:02.310
+case you're ready to click on this more button here to set your folder as working directory.
+
+00:01:02.790 --> 00:01:04.360
+Here is all good.
+
+00:01:04.800 --> 00:01:06.920
+And now let's start making our model.
+
+00:01:07.230 --> 00:01:12.380
+So we made an awesome classification template in the logistic regression section.
+
+00:01:12.390 --> 00:01:14.400
+So we're going to use it.
+
+00:01:14.460 --> 00:01:18.670
+So here we're going to take everything from here to the end.
+
+00:01:18.720 --> 00:01:24.290
+Copy this and simply paste it in the kernel as we have our file.
+
+00:01:24.720 --> 00:01:31.440
+And now what we only need to do is to create or classify here because the template is made in such a
+
+00:01:31.440 --> 00:01:35.560
+way to make your machine learning experience as efficient as possible.
+
+00:01:35.790 --> 00:01:37.920
+So we're not going to create it.
+
+00:01:37.920 --> 00:01:44.280
+Now first we're going to you know select all the data preprocessing first step to preprocess the data
+
+00:01:44.280 --> 00:01:44.480
+.
+
+00:01:44.520 --> 00:01:50.130
+So we're going to press command and control and to execute and all good as you can see the code executed
+
+00:01:50.130 --> 00:01:51.240
+properly.
+
+00:01:51.270 --> 00:01:55.820
+Now we can have a quick look at the data set the training set and the test set.
+
+00:01:56.010 --> 00:02:02.400
+So we can see that we have 400 observations in a dataset 300 that were selected to go to the training
+
+00:02:02.400 --> 00:02:05.630
+set and 100 selected to go to the test.
+
+00:02:05.670 --> 00:02:09.800
+That's because of our 0.75 split ratio here.
+
+00:02:10.320 --> 00:02:16.530
+And quick reminder this dataset is about a social network that contains information about users in a
+
+00:02:16.530 --> 00:02:17.580
+social network.
+
+00:02:17.580 --> 00:02:21.430
+So we have their age the estimated salary and the last column tells.
+
+00:02:21.430 --> 00:02:28.410
+If yes or no the user bought a product of a business kind of the social network which is a car company
+
+00:02:28.420 --> 00:02:28.600
+.
+
+00:02:28.800 --> 00:02:35.340
+So this car company put ads on the social network and the social network gathered those informations
+
+00:02:35.340 --> 00:02:37.520
+to see the users reaction.
+
+00:02:37.660 --> 00:02:43.940
+And so zero means here that the user didn't buy the SUV and one here means that the user bought the
+
+00:02:43.940 --> 00:02:44.610
+SUV.
+
+00:02:44.850 --> 00:02:51.150
+And our goal now is to make a classifier that classifies those users into two categories the category
+
+00:02:51.210 --> 00:02:55.760
+of users that didn't buy the SUV and that category of users that bought the SUV.
+
+00:02:55.830 --> 00:02:58.980
+So let's do this let's do it with Colonel SVM.
+
+00:02:59.010 --> 00:03:02.390
+And so right now we need to create our classifier.
+
+00:03:02.820 --> 00:03:06.610
+And as usual it's going to be very intuitive and simple.
+
+00:03:06.640 --> 00:03:08.440
+We're going to use the best library for this.
+
+00:03:08.520 --> 00:03:14.940
+And besides if you watched SVM tutorials you're going to see that we're using the same library and the
+
+00:03:14.940 --> 00:03:18.660
+same function we all just need to change some parameters.
+
+00:03:18.660 --> 00:03:19.410
+So let's do this.
+
+00:03:19.410 --> 00:03:25.710
+For those of you who didn't follow the SVM tutorials you need to install the package so to do this you
+
+00:03:25.800 --> 00:03:33.740
+type this command install the packages and in parenthesis and quotes he turned 71.
+
+00:03:33.900 --> 00:03:36.910
+So that's the most popular package for as the EMS.
+
+00:03:36.960 --> 00:03:39.410
+Another very popular package is current lab.
+
+00:03:39.540 --> 00:03:41.640
+You can play around and check it out.
+
+00:03:41.670 --> 00:03:45.840
+It's actually quite simple it's kind of the same function only with slightly different parameters to
+
+00:03:45.840 --> 00:03:46.550
+input.
+
+00:03:46.640 --> 00:03:48.900
+It's also a great package for as VAMC.
+
+00:03:48.900 --> 00:03:52.580
+But here we're going to use it in 71 which is one of the most popular packages.
+
+00:03:52.770 --> 00:04:01.470
+And so that's for you guys who you know if you go to your packages list here and if you go to 10 71
+
+00:04:02.070 --> 00:04:07.640
+you can see that I have this package installed on my back it just might not be the case for use.
+
+00:04:07.660 --> 00:04:12.060
+That's why I'm adding this line here in case you don't have the package installed on your packages and
+
+00:04:12.100 --> 00:04:12.530
+are.
+
+00:04:12.750 --> 00:04:18.300
+So I won't do it right now you just need to select this line and execute and it will install the package
+
+00:04:18.300 --> 00:04:19.440
+very quickly.
+
+00:04:19.440 --> 00:04:23.030
+So I'm just going to put that in comment.
+
+00:04:23.430 --> 00:04:29.400
+I just press the command shift policy and now we need to do another important thing about this library
+
+00:04:29.750 --> 00:04:36.450
+is to you know type come in library and then in parenthesis is the name not in quotes of the library
+
+00:04:36.540 --> 00:04:36.750
+.
+
+00:04:36.820 --> 00:04:38.430
+Turn 71.
+
+00:04:38.750 --> 00:04:39.670
+OK.
+
+00:04:39.690 --> 00:04:41.730
+And we need to add this line is a very important case.
+
+00:04:41.730 --> 00:04:47.520
+We have some automated scripts that you know make some kernel as we morals today.
+
+00:04:47.550 --> 00:04:53.010
+So imagine you have a workflow and you want to include the kernel as VM model and this workflow Well
+
+00:04:53.010 --> 00:04:54.920
+you will need some automated scripts.
+
+00:04:54.990 --> 00:05:00.300
+So it's important to add this time because this will automatically select your library because as you
+
+00:05:00.300 --> 00:05:04.140
+can see here it's not selected that means it's not imported in some way.
+
+00:05:04.200 --> 00:05:08.130
+So you need this line that will automatically select this package.
+
+00:05:08.490 --> 00:05:09.170
+OK.
+
+00:05:09.470 --> 00:05:11.920
+And now we are ready to create our classifier.
+
+00:05:12.210 --> 00:05:18.450
+So it's going to be the same as for as SVM which is actually a nice VM with the Linux kernel here we're
+
+00:05:18.450 --> 00:05:23.350
+not going to use or let our KNOW we going to use something else which will be the Galchen kernel.
+
+00:05:23.580 --> 00:05:24.330
+So let's do this.
+
+00:05:24.330 --> 00:05:29.940
+We're going to call our classifier as usual gasifier and that equal.
+
+00:05:29.940 --> 00:05:37.080
+And then here we are going to use the as V.M. function of the events of any one library and now we need
+
+00:05:37.080 --> 00:05:38.670
+to import the barometer.
+
+00:05:38.730 --> 00:05:40.920
+So as usual let's have a look.
+
+00:05:41.190 --> 00:05:42.190
+Here it is.
+
+00:05:42.280 --> 00:05:44.040
+And now click on this.
+
+00:05:44.340 --> 00:05:48.830
+And here we are in the our documentation for SVM ETN 71.
+
+00:05:49.200 --> 00:05:51.330
+OK so let's have a look at the arguments.
+
+00:05:51.450 --> 00:05:53.220
+The first argument is formula.
+
+00:05:53.220 --> 00:05:59.710
+So as far as you it's going to be purchased till the end then a point and the point represents all the
+
+00:05:59.700 --> 00:06:00.920
+independent variables.
+
+00:06:01.140 --> 00:06:03.560
+So we know this then data.
+
+00:06:03.720 --> 00:06:08.910
+OK so yes you need to specify the data because you want to specify the data set on which you want to
+
+00:06:08.910 --> 00:06:11.860
+train your kernel as VM model.
+
+00:06:11.910 --> 00:06:17.260
+So we need to specify data equals training set because we are training a model in the training set then
+
+00:06:17.280 --> 00:06:19.940
+X Y and scale are not important here.
+
+00:06:20.070 --> 00:06:24.330
+What's really important are the type and the kernel.
+
+00:06:24.330 --> 00:06:29.850
+So the type is whether you want to make a regression model that is as V.M. for regression that is as
+
+00:06:29.850 --> 00:06:36.540
+we are that we saw in the regression part or as we infer classification which is the common way of seeing
+
+00:06:36.540 --> 00:06:37.330
+as V.
+
+00:06:37.650 --> 00:06:44.370
+So you will need to specify the C classification type which is the default type for classification for
+
+00:06:44.380 --> 00:06:45.190
+SVM.
+
+00:06:45.250 --> 00:06:52.780
+Remember the as we are we chose EPM regression that was the default type for regression for SVM.
+
+00:06:52.870 --> 00:06:58.030
+But here we are in classifications who will choose this see classification type and then the most important
+
+00:06:58.020 --> 00:06:58.880
+is the kernel.
+
+00:06:58.990 --> 00:07:00.730
+Here we jumped to a higher level.
+
+00:07:00.780 --> 00:07:06.390
+We are making a more sophisticated SVM than the SBM we did in the previous section which was a linear
+
+00:07:06.390 --> 00:07:08.380
+our kernel as V.M..
+
+00:07:08.550 --> 00:07:15.600
+But now we want to go pro and we are choosing Galchen as V.M. which you will see make a terrific job
+
+00:07:15.920 --> 00:07:21.960
+at classifying new users in the social network because remember the kernel as VM was then they are which
+
+00:07:21.960 --> 00:07:28.330
+made our SVM model a linear our classifier and therefore the separator separating the two classes of
+
+00:07:28.320 --> 00:07:33.030
+users was a straight line here and therefore couldn't catch the users here.
+
+00:07:33.030 --> 00:07:35.760
+That made our dataset nonlinearly separable.
+
+00:07:36.150 --> 00:07:41.540
+So here we're going to choose the gouging kernel which is going to be the radial basis kernel.
+
+00:07:41.550 --> 00:07:44.870
+Actually we're not going to write radial basis we're just going to write radio.
+
+00:07:44.880 --> 00:07:45.950
+That's how it works.
+
+00:07:46.000 --> 00:07:48.600
+But the Galchen kernel is radio.
+
+00:07:48.610 --> 00:07:50.300
+Actually you can see the formula here.
+
+00:07:50.520 --> 00:07:54.390
+Carroll gave you the formula of the caching kernel and here it is.
+
+00:07:54.390 --> 00:08:00.680
+OK so now let's jump back to our code and let's implement this.
+
+00:08:00.790 --> 00:08:08.910
+I guess I remember the first argument was formula and then here we have to first take the dependent
+
+00:08:08.910 --> 00:08:10.940
+variable which is purchase.
+
+00:08:10.990 --> 00:08:17.190
+No if you go back to her data set this is the depend variable and this is purchased then till that which
+
+00:08:17.190 --> 00:08:23.530
+is out and on and then a dot to take all the independent variables are trainset.
+
+00:08:23.820 --> 00:08:27.670
+That is we're taking age and estimated sorry.
+
+00:08:28.530 --> 00:08:34.730
+All right then come up to go to the next argument enter and then the second argument.
+
+00:08:34.750 --> 00:08:41.880
+So the second argument I remember it was data equals the trainset again then the next parameter What
+
+00:08:41.880 --> 00:08:50.250
+was it was type type equals C classification actually we don't really need to input the type here because
+
+00:08:50.250 --> 00:08:51.550
+it's the default type.
+
+00:08:51.960 --> 00:08:58.990
+But let's specify this to make the distinction between as V.M. for regression as we are and as VM for
+
+00:08:58.990 --> 00:09:01.530
+classification kernel is V.M. here.
+
+00:09:01.870 --> 00:09:08.070
+And then of course we will add the essential parameter for this section kernel VM which is of course
+
+00:09:08.350 --> 00:09:16.710
+kernel and that's where we pick our more sophisticated kernel which is the gaussian kernel call here
+
+00:09:16.910 --> 00:09:18.270
+radio.
+
+00:09:18.820 --> 00:09:19.420
+All right.
+
+00:09:19.430 --> 00:09:28.200
+And now our classifier is ready so let's immediately select this and perfect our classifier classifiers
+
+00:09:28.200 --> 00:09:29.120
+now built.
+
+00:09:29.350 --> 00:09:34.380
+So now let's use it to predict the test results that we're going to select.
+
+00:09:34.380 --> 00:09:38.160
+This line simply and press command and control press enter to execute.
+
+00:09:38.460 --> 00:09:39.750
+And here is our white press.
+
+00:09:39.750 --> 00:09:40.980
+Let's have a look.
+
+00:09:40.990 --> 00:09:45.400
+Why Fred we type right here in the console press enter.
+
+00:09:45.660 --> 00:09:49.760
+And here we have all the predictions for the test set.
+
+00:09:49.770 --> 00:09:52.890
+So there are 100 predictions so let's have a look at the first one.
+
+00:09:53.130 --> 00:09:59.200
+So we need to compare this why prend which is the vector of predictions with the true results of the
+
+00:09:59.190 --> 00:10:01.410
+observations for true results whether they.
+
+00:10:01.460 --> 00:10:02.460
+But yes or no.
+
+00:10:02.460 --> 00:10:06.600
+The SUV and for this we need to go to the test here to check it out.
+
+00:10:06.850 --> 00:10:12.370
+So let's see one two three four and five users didn't buy the SUV.
+
+00:10:12.370 --> 00:10:19.220
+In reality and our predictor predicted that these same five users didn't buy the SUV.
+
+00:10:19.330 --> 00:10:20.750
+So that's some correct predictions.
+
+00:10:20.790 --> 00:10:22.210
+It's a very good start.
+
+00:10:22.520 --> 00:10:27.720
+And if we look at the next observation we have one here one here one here one here.
+
+00:10:27.750 --> 00:10:30.810
+So that makes the eight first predictions correct predictions.
+
+00:10:30.820 --> 00:10:38.150
+And here we have our first mistake our first incorrect predictions because for the user number 22 our
+
+00:10:38.160 --> 00:10:41.660
+class value predicts that this user wouldn't buy the SUV.
+
+00:10:41.860 --> 00:10:43.940
+And in reality it did.
+
+00:10:43.950 --> 00:10:48.810
+If you look at the number 22 we can see that we have a one here which means that this user bought the
+
+00:10:48.820 --> 00:10:49.940
+SUV.
+
+00:10:50.120 --> 00:10:55.430
+OK so but the best way to look at these predictions is to use the confusion matrix.
+
+00:10:55.430 --> 00:10:56.540
+So let's do this.
+
+00:10:56.540 --> 00:10:59.960
+The section is here already we don't have to change anything.
+
+00:10:59.960 --> 00:11:02.740
+The template is there to ease all work.
+
+00:11:02.960 --> 00:11:07.390
+So let's to like design that's command and control press enter to execute.
+
+00:11:07.460 --> 00:11:09.560
+And here we have our matrix.
+
+00:11:09.710 --> 00:11:14.620
+So we're going to look at it in the console so see I'm here enter.
+
+00:11:14.810 --> 00:11:16.390
+And here is the matrix.
+
+00:11:16.730 --> 00:11:17.140
+OK.
+
+00:11:17.150 --> 00:11:27.200
+So what we have here we have 58 plus 32 equals 90 correct predictions and four plus six equals 10 incorrect
+
+00:11:27.200 --> 00:11:28.170
+predictions.
+
+00:11:28.520 --> 00:11:29.590
+So that's not too bad.
+
+00:11:29.840 --> 00:11:34.970
+But now the most exciting part is coming because we're going to be visualizing the training set results
+
+00:11:35.710 --> 00:11:41.090
+and actually right now we don't have to change anything except maybe the title here classifier and then
+
+00:11:41.090 --> 00:11:47.590
+here you need to specify kernel as VM kernel as VM as well as here in the test set.
+
+00:11:47.630 --> 00:11:51.560
+So Colonel as we and as well.
+
+00:11:52.490 --> 00:11:52.820
+All right.
+
+00:11:52.820 --> 00:11:57.610
+Now we can get some coffee and just execute this and watch the results.
+
+00:11:57.640 --> 00:11:59.300
+So we're going to do this.
+
+00:11:59.510 --> 00:12:05.660
+We're going to first look at the results here and press them into controllers and to execute
+
+00:12:10.190 --> 00:12:13.770
+and wow these are the beautiful results of Colonel SVM.
+
+00:12:14.090 --> 00:12:16.900
+We can see how it's making this curve here to classify.
+
+00:12:16.880 --> 00:12:22.340
+Well most of the users and the social network here since we have a two dimensional space here for data
+
+00:12:22.350 --> 00:12:27.280
+sets that means that the data was mapped to a three dimensional space.
+
+00:12:27.530 --> 00:12:33.350
+And then on this dimensional space it managed to make the data linearly separable so that it can find
+
+00:12:33.440 --> 00:12:40.340
+a linear or hyperplane that separates in a much better way the two classes and then projected back to
+
+00:12:40.340 --> 00:12:47.660
+this two dimensional space to finally obtain this curve here that separates in a much better way the
+
+00:12:47.660 --> 00:12:51.490
+two classes than a linear class or you would do with a straight line here.
+
+00:12:51.640 --> 00:12:55.960
+As we saw for logistic regression or SVM as we end with the linear kernel.
+
+00:12:56.120 --> 00:13:00.920
+So that's what happened that's what happened behind the scenes the kernel lesbian did an amazing job
+
+00:13:00.950 --> 00:13:03.040
+so we can say contrats OK.
+
+00:13:03.140 --> 00:13:08.480
+So for those of you who are seeing this for the first time I'll just quickly remind what it is the points
+
+00:13:08.480 --> 00:13:10.840
+here are the true observations the true results.
+
+00:13:10.850 --> 00:13:16.700
+So the red points are the users who didn't buy the SUV in reality and the green points are the users
+
+00:13:16.700 --> 00:13:21.190
+who bought the SUV and then the regions that we see here are the prediction region.
+
+00:13:21.200 --> 00:13:26.810
+So the red region is the region where our model predicts that the user doesn't buy the SUV and the green
+
+00:13:26.810 --> 00:13:30.520
+region is the one where our model predicts that the use of bias is.
+
+00:13:30.680 --> 00:13:36.950
+So for example that means that for this particular user red point which is in the green region that
+
+00:13:36.950 --> 00:13:41.840
+makes an incorrect prediction because the truth is the user didn't buy it yesterday.
+
+00:13:41.990 --> 00:13:47.150
+But since this user is in the green region that means that the model predicted that this user bought
+
+00:13:47.380 --> 00:13:50.180
+the SUV even if that's not what happened in real life.
+
+00:13:50.360 --> 00:13:52.090
+So that's why the graph is about.
+
+00:13:52.370 --> 00:13:57.370
+And here is the nonlinear separator of the kernel as VM algorithm.
+
+00:13:57.440 --> 00:14:04.220
+And thanks to this non-linear separator our kernel as VM could classify correctly those users here which
+
+00:14:04.220 --> 00:14:09.380
+wasn't the case for the linear sequiturs because since we had the straight lines it couldn't catch these
+
+00:14:09.410 --> 00:14:10.980
+users in the right Kagami.
+
+00:14:11.030 --> 00:14:15.740
+That is the green category because those users actually bought the SUV in real life so they should be
+
+00:14:15.740 --> 00:14:16.730
+in the green region.
+
+00:14:16.760 --> 00:14:21.380
+And this wasn't the case for the linear separator and that was the case for the kernel as VM separator
+
+00:14:21.620 --> 00:14:23.630
+because it's a non-linear classifier.
+
+00:14:24.020 --> 00:14:24.470
+Perfect.
+
+00:14:24.470 --> 00:14:30.440
+Now let's have a look at the test results to see how our model behaves on new observations to see if
+
+00:14:30.440 --> 00:14:34.400
+it can still classified and predict the results of new observations.
+
+00:14:34.730 --> 00:14:42.210
+So we're going to do this we only have to select this press command control us and to to execute.
+
+00:14:43.460 --> 00:14:45.610
+And here are the test results.
+
+00:14:45.620 --> 00:14:45.980
+OK.
+
+00:14:46.010 --> 00:14:47.750
+That looks great as well.
+
+00:14:47.750 --> 00:14:52.790
+First an important thing to understand is that the reagents that we see here are the same regions as
+
+00:14:52.790 --> 00:14:54.030
+we saw in the data set.
+
+00:14:54.230 --> 00:14:59.240
+If you go back to the train set and then go back to the descent you can see that the regions here don't
+
+00:14:59.240 --> 00:15:04.600
+change only the observation points change because of course these are new observation points.
+
+00:15:04.670 --> 00:15:10.400
+And so here we can see that the Colonel as you said did an amazing job at classifying new observations
+
+00:15:10.390 --> 00:15:16.130
+because all these tested observations here other users who didn't buy the SUV because the points are
+
+00:15:16.120 --> 00:15:21.260
+red and they are in the red region that is the region where classified predicts that the users don't
+
+00:15:21.260 --> 00:15:22.340
+buy the SUV.
+
+00:15:22.370 --> 00:15:24.200
+So that's correct predictions.
+
+00:15:24.220 --> 00:15:28.660
+Same for these guys here all the green points that fall in the green region.
+
+00:15:28.880 --> 00:15:34.970
+And of course we have those incorrect predictions which are for example this green user here who is
+
+00:15:35.240 --> 00:15:36.860
+in the red region as well.
+
+00:15:36.860 --> 00:15:39.040
+Those two green here is that three.
+
+00:15:39.080 --> 00:15:41.420
+Then we have the red users this one this one.
+
+00:15:41.570 --> 00:15:48.890
+So four five six seven eight nine and actually 10 we can see that there is a little green point here
+
+00:15:48.950 --> 00:15:51.110
+hiding behind the red point.
+
+00:15:51.550 --> 00:15:51.900
+OK.
+
+00:15:51.910 --> 00:15:53.750
+So that's definitely a very good job.
+
+00:15:53.780 --> 00:15:59.570
+You will see how the next classifiers will make a different style of classification of separation.
+
+00:15:59.650 --> 00:16:01.300
+You will see that there won't be a curve.
+
+00:16:01.310 --> 00:16:04.880
+It will be something else and I will let you find out about the surprise.
+
+00:16:05.300 --> 00:16:11.090
+But definitely the kernel as VM is a great classifier when your data is not linearly separable and we
+
+00:16:11.090 --> 00:16:15.950
+can see how it definitely improved the results of the linear transfers that we saw with the logistic
+
+00:16:15.950 --> 00:16:17.260
+regression as well.
+
+00:16:17.600 --> 00:16:21.770
+All right so thank you for watching this tutorial about Colonel SVM.
+
+00:16:21.770 --> 00:16:23.220
+I hope you enjoyed it.
+
+00:16:23.240 --> 00:16:27.370
+There will be a few more surprises with the next guest first as I told you so you're going to see the
+
+00:16:27.380 --> 00:16:28.910
+results going to be pretty fun.
+
+00:16:29.120 --> 00:16:34.010
+And so I look forward to seeing you in the next sections and tell them enjoy machine learning
