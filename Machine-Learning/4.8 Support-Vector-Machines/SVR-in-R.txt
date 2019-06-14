@@ -1,0 +1,37 @@
+# Read CSV, note the delimiter (sep)
+df <- read.csv('student-mat.csv',sep=';')
+View(df)
+############ Linear Reg model
+model <- lm(G3 ~ ., df)
+
+# make a prediction for each X
+predictedY <- predict(model, df)
+error <- df$G3 - predictedY
+
+#Create an rmse function
+rmse <- function(error)
+{
+  sqrt(mean(error^2))
+}
+####### Evaluting Linear Model ##########
+svrPredictionRMSE <- rmse(error)
+print(svrPredictionRMSE)
+
+######## SVR ##############
+model2 <- svm(G3 ~ . , df)
+predictedY <- predict(model2, df)
+svrPredictionRMSE2 <- rmse(error)
+print(svrPredictionRMSE2)
+
+####### Perform Grid Search ##########
+tuneResult <- tune(svm, G3 ~ .,  data = df,ranges = list(epsilon = seq(0,1,0.1), cost = 2^(2:9)))
+print(tuneResult)
+# Draw the tuning graph
+#plot(tuneResult)
+
+#Evaluting SVR Grid Search Model
+tunedModel <- tuneResult$best.model
+tunedModelY <- predict(tunedModel, df) 
+error <- df$G3 - tunedModelY
+tunedModelRMSE <- rmse(error)
+print(tunedModelRMSE)
