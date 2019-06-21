@@ -1,333 +1,78 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
-import seaborn as sns
-
-
-# In[7]:
-
-
-from sklearn import datasets
-
-
-# In[8]:
-
-
-data = datasets.load_breast_cancer()
-
-
-# In[32]:
-
-
-X = pd.DataFrame(data = data['data'], columns=data['feature_names'])
-
-
-# In[33]:
-
-
-y = data['target']
-
-
-# In[34]:
-
-
-y
-
-
-# In[35]:
-
-
-X.head()
-
-
-# In[36]:
-
-
-from sklearn.preprocessing import StandardScaler
-
-
-# In[37]:
-
-
-scalar = StandardScaler()
-
-
-# In[38]:
-
-
-X = scalar.fit_transform(X)
-
-
-# In[39]:
-
-
-from sklearn.model_selection import train_test_split
-
-
-# In[40]:
-
-
-X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=101)
-
-
-# In[41]:
-
-
-from sklearn.linear_model import LogisticRegression
-
-
-# In[42]:
-
-
-log_reg = LogisticRegression()
-
-
-# In[43]:
-
-
-log_reg.fit(X_train, y_train)
-
-
-# In[45]:
-
-
-y_pred1 = log_reg.predict(X_test)
-
-
-# In[132]:
-
-
-print(metrics.classification_report(y_test, y_pred1))
-
-
-# In[46]:
-
-
-from sklearn import metrics
-
-
-# In[48]:
-
-
-fpr, tpr, thr = metrics.roc_curve(y_test, y_pred1)
-
-
-# In[60]:
-
-
-auc_score = metrics.roc_auc_score(y_test, y_pred1)
-
-
-# In[53]:
-
-
-#roc_auc = metrics.auc(fpr, tpr)
-
-
-# In[61]:
-
-
-auc_score
-
-
-# In[62]:
-
-
-plt.title('Receiver Operating Characteristic')
-plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % auc_score)
-plt.legend(loc = 'lower right')
-plt.plot([0, 1], [0, 1],'r--')
-plt.xlim([0, 1])
-plt.ylim([0, 1])
-plt.ylabel('True Positive Rate')
-plt.xlabel('False Positive Rate')
-
-
-# # Using SVM
-
-# In[63]:
-
-
-from sklearn.svm import SVC
-
-
-# In[66]:
-
-
-svc_reg = SVC(C=10, gamma=0.01)
-
-
-# In[67]:
-
-
-svc_reg.fit(X_train, y_train)
-
-
-# In[68]:
-
-
-y_pred2 = svc_reg.predict(X_test)
-
-
-# In[133]:
-
-
-print(metrics.classification_report(y_test, y_pred2))
-
-
-# In[72]:
-
-
-fpr2, tpr2, thr2 = metrics.roc_curve(y_test, y_pred2)
-
-
-# In[73]:
-
-
-auc_score2 = metrics.roc_auc_score(y_test, y_pred2)
-
-
-# In[76]:
-
-
-auc_score2
-
-
-# In[93]:
-
-
-plt.title('Receiver Operating Characteristic')
-plt.plot(fpr, tpr, 'b', label = 'Logistic AUC = %0.2f' % auc_score)
-plt.plot(fpr2, tpr2, 'b', label = 'SVM AUC = %0.2f' % auc_score2, color='green')
-plt.legend(loc = 'lower right')
-plt.plot([0, 1], [0, 1],'r--')
-
-
-# In[77]:
-
-
-from sklearn.model_selection import GridSearchCV
-
-
-# In[101]:
-
-
-grid_params = {'C':[1,10,100,1000],'gamma':[0.1,0.01,0.001,0.0001], 'kernel':['rbf','poly'],'degree':[3,4,5,6,7]}
-
-
-# In[102]:
-
-
-gs_reg = GridSearchCV(svc_reg, grid_params, verbose= 3)
-
-
-# In[103]:
-
-
-gs_reg.fit(X_train, y_train)
-
-
-# In[104]:
-
-
-gs_reg.get_params
-
-
-# In[105]:
-
-
-gs_reg.best_params_
-
-
-# In[107]:
-
-
-gs_reg.best_estimator_
-
-
-# In[108]:
-
-
-#Initialing another SVM regresssor with best parameters and checking the auc roc
-
-
-# In[109]:
-
-
-svm_reg3 = SVC(C=100, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape='ovr', degree=3, gamma=0.0001, kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=0.001, verbose=False)
-
-
-# In[120]:
-
-
-#svm_reg3.fit(X_train, y_train)
-svm_reg3.fit(X_train, y_train)
-
-
-# In[121]:
-
-
-#pred = svm_reg3.predict(X_test)
-
-
-# In[124]:
-
-
-#metrics.roc_auc_score(y_test, pred)
-
-
-# In[126]:
-
-
-y_pred3 = svm_reg3.predict(X_test)
-
-
-# In[134]:
-
-
-print(metrics.classification_report(y_test, y_pred3))
-
-
-# In[127]:
-
-
-fpr3, tpr3, thr3 = metrics.roc_curve(y_test, y_pred3)
-
-
-# In[128]:
-
-
-auc_score3 = metrics.roc_auc_score(y_test, y_pred3)
-
-
-# In[129]:
-
-
-auc_score3
-
-
-# In[131]:
-
-
-plt.title('Receiver Operating Characteristic')
-plt.plot(fpr, tpr, 'b', label = 'Logistic AUC = %0.2f' % auc_score)
-plt.plot(fpr2, tpr2, 'b', label = 'SVM AUC = %0.2f' % auc_score2, color='green')
-plt.plot(fpr3, tpr3, 'b', label = 'Optimised SVM AUC = %0.2f' % auc_score3, color='red')
-plt.legend(loc = 'lower right')
-plt.plot([0, 1], [0, 1],'r--')
-plt.ylabel('True Positive Rate')
-plt.xlabel('False Positive Rate')
-
-#plt.xlim([0, 1])
-#plt.ylim([0, 1])
-
+def show_coefficients(regression_model, X_train, X_test, y_train, y_test):
+    #For printing in colored font
+    import colorama
+    from colorama import Fore, Style
+    #print(Fore.BLUE + "Hello World")
+    #print(Style.RESET_ALL)
+    
+    #7. Checking the data types, exit if not proper types
+    X_train_type = type(X_train)
+    X_test_type = type(X_test)
+    y_train_type = type(y_train)
+    y_test_type = type(y_test)
+    if ((X_train_type != pd.DataFrame) & (X_test_type != pd.DataFrame) & (y_train_type != pd.Series) & (y_test_type != pd.Series)):
+        print(Fore.RED + '**** Please pass the data in expected format ****')
+        print('You passed the data in the following format:')
+        print('X_train type you passsed: ',X_train_type)
+        print('X_test type you passsed: ',X_test_type)
+        print('y_train type you passsed: ',y_train_type)
+        print('y_test type you passsed: ',y_test_type)
+        print(Fore.BLUE +'Expected Formats are: ')
+        print('X_train type: ',pd.DataFrame)
+        print('X_test type: ',pd.DataFrame)
+        print('y_train type: ',pd.Series)
+        print('y_test type: ',pd.Series)
+        return 'Exiting Method'
+ 
+    #1. Getting R SquaredAdjusted R-Squared
+    print(Fore.BLUE + 'R Squared Score:')
+    train_rsq = regression_model.score(X_train,y_train)
+    test_rsq = regression_model.score(X_test,y_test)
+    print(Fore.BLACK + 'R Squared Score (Train Model): ',train_rsq.round(5))
+    print(Fore.BLACK + 'R Squared Score (Test Model): ',test_rsq.round(5))
+    print(" ")
+    
+    #2. Getting Adjusted R Squared
+    print(Fore.BLUE + 'Adjusted R Squared Score:')
+    train_adrsq = 1 - (1 - train_rsq) * (X_train.shape[0]-1)/(X_train.shape[0] - X_train.shape[1] - 1)
+    test_adrsq = 1 - (1 - test_rsq) * (X_test.shape[0]-1)/(X_test.shape[0] - X_test.shape[1] - 1)
+    print(Fore.BLACK + 'Adjusted R Squared (Train Model):', train_adrsq.round(5))
+    print(Fore.BLACK + 'Adjusted R Squared (Test Model):', test_adrsq.round(5))
+    print(' ')
+    
+    #3. Getting Intercept
+    print(Fore.BLUE + "Bias / Intercept: ")
+    print(Fore.BLACK + "Intercept for the model: ",regression_model.intercept_.round(5))
+    print(' ')
+    
+    #=========== Getting & Creating the coefficient & p-values matrix =====================
+    #4. Getting Coefficients
+    print(Fore.BLUE + "Weights / Coefficients: ")
+    print(Style.RESET_ALL)
+    coefs = regression_model.coef_
+    coefs= coefs.reshape(-1,1)
+    coefs_df = pd.DataFrame(data=coefs.round(5), index=X_test.columns, columns=['Coefficients'])
+    
+    #5. Getting p-values of features
+    from sklearn.feature_selection import f_regression
+    X_all = pd.concat([X_train, X_test])
+    y_all = y_train.append(y_test)
+    p_values = f_regression(X_all,y_all)[1] 
+    
+    #Tried adding round off to 5 digits for p-value but it is not wotking, hence commented
+    #coefs_df = pd.concat([coefs_df,pd.DataFrame(p_values, index=X_test.columns, columns=['F-stat(p-value)']), 
+                          #pd.DataFrame(p_values.round(5), index=X_test.columns, columns=['round(p-value)']) ], axis=1)
+    coefs_df = pd.concat([coefs_df,pd.DataFrame(p_values, index=X_test.columns, columns=['F-stat(p-value)'])], axis=1)
+    
+    #6. Adding Significant Column
+    sig = []
+    for element in p_values:
+        if element.round(5) < 0.05:
+            sig.append('Yes')
+        else:
+            sig.append('No')
+    coefs_df = pd.concat([coefs_df, pd.DataFrame(sig, columns=['Significant'], index=X_test.columns)], axis=1)
+    print(coefs_df)
+    print(' ')
+    print("========================")
+    #===================================================================================================================
