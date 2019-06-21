@@ -1,6 +1,5 @@
-#Regression Diagnostic URLs:
-https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html
-
+#Regression Diagnostic URL:https://www.statsmodels.org/dev/examples/notebooks/generated/regression_diagnostics.html
+#Related Explanation: https://www.statsmodels.org/stable/diagnostic.html
 
 def show_coefficients(regression_model, X_train, X_test, y_train, y_test):
     #For printing in colored font
