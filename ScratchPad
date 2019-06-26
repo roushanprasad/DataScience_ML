@@ -2,91 +2,743 @@
 #Related Explanation: https://www.statsmodels.org/stable/diagnostic.html
 #Verify Assumptions of Linear Regression: https://towardsdatascience.com/verifying-the-assumptions-of-linear-regression-in-python-and-r-f4cd2907d4c0
 
-def show_stats(regression_model, X_train, X_test, y_train, y_test):
-    #For printing in colored font
-    import colorama
-    from colorama import Fore, Style
-    #print(Fore.BLUE + "Hello World")
-    #print(Style.RESET_ALL)
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+pd.set_option('display.max_rows', None)
+
+
+# In[2]:
+
+
+data = pd.read_csv('TrainSales.csv')
+
+
+# In[3]:
+
+
+data.head()
+
+
+# In[4]:
+
+
+plt.figure(figsize=(10,8))
+sns.heatmap(data.isnull())
+
+
+# In[5]:
+
+
+data.isnull().sum()
+
+
+# In[6]:
+
+
+data.info()
+
+
+# In[7]:
+
+
+data.describe(include='all')
+
+
+# In[8]:
+
+
+data['Outlet_Size'].unique()
+
+
+# ### Consolidating Item Fat Content Values
+
+# In[9]:
+
+
+data['Item_Fat_Content'].unique()
+
+
+# In[10]:
+
+
+sns.countplot(x=data['Item_Fat_Content'], data=data)
+
+
+# In[11]:
+
+
+def replace_item(item):
+    if (item == 'Low Fat'):
+        return 'LF'
+    elif (item == 'Regular'):
+        return 'RE'
+    elif item == 'low fat' :
+        return 'LF'
+    elif item == 'reg':
+        return 'RE'
+    elif item == 'LF':
+        return 'LF'
+    else :
+        return 'OT'
+
+
+# In[12]:
+
+
+#data['Item_Fat_Content'] = data['Item_Fat_Content'].map({'Low Fat':'LF','Regular':'RE','low fat':'LF','reg':'RE', np.NaN:0})
+data['Item_Fat_Content'] = data['Item_Fat_Content'].apply(replace_item)
+
+
+# In[13]:
+
+
+data['Item_Fat_Content'].unique()
+
+
+# In[14]:
+
+
+data.head()
+
+
+# ## Imputation
+# 
+# #### Imputing missing Item Weights
+
+# **Lets see average Item weight based on Item Fat Content**
+
+# In[15]:
+
+
+sns.boxplot(x=data['Item_Fat_Content'], y=data['Item_Weight'], data=data)
+
+
+# **Lets see average item weight based on Item type and fat content now**
+
+# In[16]:
+
+
+data['Item_Type'].unique()
+
+
+# In[17]:
+
+
+plt.figure(figsize=(25,5))
+sns.boxplot(x=data['Item_Type'], y=data['Item_Weight'], data=data)
+
+
+# In[18]:
+
+
+a = data.groupby(['Item_Type','Item_Fat_Content']).mean()['Item_Weight']
+
+
+# In[19]:
+
+
+mean_weight_type_fat = data.groupby(['Item_Type','Item_Fat_Content']).mean()
+
+
+# In[20]:
+
+
+mean_weight_type_fat = mean_weight_type_fat.reset_index(level=1).reset_index(level=0)
+
+
+# In[21]:
+
+
+mean_weight_type_fat
+
+
+# In[22]:
+
+
+filter1 = mean_weight_type_fat['Item_Type']=='Baking Goods'
+
+
+# In[23]:
+
+
+filter2 = mean_weight_type_fat['Item_Fat_Content']=='LF'
+
+
+# In[24]:
+
+
+mean_weight_type_fat.where(filter1 & filter2 )[:1]
+
+
+# In[25]:
+
+
+mean_weight_type_fat.where(filter1 & filter2 )[:1]['Item_Weight']
+
+
+# In[26]:
+
+
+#data[['Item_Fat_Content','Item_Weight','Item_Type']].apply(null_imputer)
+data2 = data.copy()
+
+
+# In[27]:
+
+
+data2.isnull().sum()
+
+
+# In[28]:
+
+
+data2.head(4)
+
+
+# In[29]:
+
+
+def show_me():
+    filter1 = mean_weight_type_fat['Item_Type']=='Baking Goods'
+    filter2 = mean_weight_type_fat['Item_Fat_Content']=='LF'
+    weight1 = mean_weight_type_fat.where(filter1 & filter2 )[:1]['Item_Weight']
+    print(weight1[0])
+    return weight1
+
+
+# In[ ]:
+
+
+
+
+
+# #### Imputing the Averge values based on Item Type and Fat Content
+
+# In[30]:
+
+
+#This is not working, try to make it work
+#For now commenting this out and doing it in a simple broader way
+#def null_imputer(item):
+#    item_weight = item[0]
+#    item_type = item[1]
+#    item_fat = item[2]
+#    if pd.isnull(item_weight) :
+#        print('Item Type: ',item_type)
+#        filter1 = mean_weight_type_fat['Item_Type']==item_type
+#        print('Item_Fat: ', item_fat)
+#        filter2 = mean_weight_type_fat['Item_Fat_Content']==item_fat
+#        weight2 = mean_weight_type_fat.where(filter1 & filter2 )[:1]['Item_Weight']
+#        print(weight2[0])
+#        return weight2[0]
+#    else:
+#        return item_weight
+
+
+# In[31]:
+
+
+def null_imputer(item):
+    item_weight = item[0]
+    item_type = item[1]
+    item_fat = item[2]
+    if pd.isnull(item_weight) :
+        return 12.5
+    else:
+        return item_weight
+
+
+# In[32]:
+
+
+#data[['Item_Fat_Content','Item_Weight','Item_Type']].apply(null_imputer)
+data2['Item_Weight'] = data2[['Item_Weight','Item_Type','Item_Fat_Content']].apply(null_imputer, axis=1)
+
+
+# In[33]:
+
+
+data2.isnull().sum()
+
+
+# **Investigating 'Tier 3' Grocery missing values**
+
+# In[34]:
+
+
+#data2[data2['Outlet_Location_Type']=='Tier 3']
+
+
+# In[35]:
+
+
+temp_df = data2[data2['Outlet_Size'].isnull()]
+
+
+# In[36]:
+
+
+temp_df.head()
+
+
+# In[37]:
+
+
+print("Missing Values from Tier: ", temp_df['Outlet_Location_Type'].unique())
+print("Missing Values from Outlet Type: ", temp_df['Outlet_Type'].unique())
+
+
+# ### First Observation:
+# All the missing values in 'Outlet_Type' are either from: 
+# - Tier 2 or Tier 3
+# - Grocery Store or Supermarket Type 1
+
+# **Checking for 'Tier 2' and what all Outlet types it has, checking the sale range of non-missing 'Outlet size' and will assign the outlet size accordingly.**
+
+# In[38]:
+
+
+temp2 = data2[data2['Outlet_Location_Type']=='Tier 2']
+
+
+# In[39]:
+
+
+temp2.head()
+
+
+# In[40]:
+
+
+temp2['Outlet_Size'].unique()
+
+
+# **We mostly have values for Outlet Size 'Small', hence we are missing 'Medium' and 'High'**
+# 
+# Lets check for what outlet types and Supermarket types we are actually missing the Outlet size values:
+
+# In[41]:
+
+
+print("We are missing the Outlet Size values for Market Type: ",temp2[temp2['Outlet_Size'].isnull()]['Outlet_Type'].unique())
+
+
+# **We are missing the following for Tier 2:**
+# - Missing 'Outlet Size' for 'Supermarket Type 1'
+# 
+# Lets check what Outlet Size we have for other Outlet Types
+
+# In[42]:
+
+
+temp2[temp2['Outlet_Type']=='Grocery Store']
+
+
+# In[43]:
+
+
+temp2[temp2['Outlet_Type']=='Supermarket Type3']
+
+
+# In[44]:
+
+
+temp2[temp2['Outlet_Type']=='Supermarket Type2']
+
+
+# In[45]:
+
+
+temp2[temp2['Outlet_Type']=='Supermarket Type1'].head()
+
+
+# WHat we concluded from above 3 results is, **for Tier 2**: 
+# - There are no Outlet types as 'Supermarket 2, Supermarket2, Grocery Store' 
+
+# In[46]:
+
+
+#Lets check what High and Medium are assigned to
+
+
+# In[47]:
+
+
+temp2[temp2['Outlet_Size']=='Medium']
+
+
+# In[48]:
+
+
+temp2[temp2['Outlet_Size']=='Medium']
+
+
+# **Apparantly, there are no High and Medium assigned to Outlet Size. 
+# Hence we will try to fill for Small first. 
+# Lets get the min and max range for Outlet Size 'Small'**
+
+# In[49]:
+
+
+#Checking Maximum Sale for 'Tier 2'
+temp2[temp2['Outlet_Size']=='Small']['Item_Outlet_Sales'].max()
+
+
+# In[50]:
+
+
+#Checking Maximum Sale for 'Tier 2'
+temp2[temp2['Outlet_Size']=='Small']['Item_Outlet_Sales'].min()
+
+
+# ### Impuataion 1 concept:
+# #### Hence anything with 'Tier 2' and 'Supermarket Type1' 
+# - within range less than 8479.6288, we will assign Outlet Type as 'Small'
+
+# In[ ]:
+
+
+
+
+
+# **Now Checking for Tier 3**
+
+# In[51]:
+
+
+temp3 = data2[data2['Outlet_Location_Type']=='Tier 3']
+
+
+# In[52]:
+
+
+temp3.head()
+
+
+# In[53]:
+
+
+temp3['Outlet_Size'].unique()
+
+
+# Looks like we mostly have Medium and high Outlets type in here. We are missing 'Small' if there are any. 
+
+# In[54]:
+
+
+#Checking for what outlet types and Supermarket types we are actually missing the Outlet size values:
+print("We are missing the Outlet Size values for Market Type: ",temp3[temp3['Outlet_Size'].isnull()]['Outlet_Type'].unique())
+
+
+# Checking Ranges for Medium and High
+
+# In[55]:
+
+
+#This will give you dataframe whre all the Outlet Size assigned for 'Medium'
+temp3[temp3['Outlet_Size']=='Medium'].head()
+
+
+# In[56]:
+
+
+#Lets check what is the minimum assigned range for 'Medium'
+temp3[temp3['Outlet_Size']=='Medium']['Item_Outlet_Sales'].min()
+
+
+# In[57]:
+
+
+#Similarly, lets check what is the minimum assigned range for 'Medium'
+#temp3[temp3['Outlet_Size']=='High']['Item_Outlet_Sales'].min()
+
+
+# In[58]:
+
+
+temp3[temp3['Outlet_Size']=='High'].head()
+
+
+# ### Imputation Concept 2:
+# #### If you notice here, it looks like the Sales does not matter, 
+# - If it is 'Tier 3' 'Supermarket Type 1' - its High
+# - If it is 'Tier 3' 'Supermarket Type 2 and 3' - its Medium
+# Hence, 
+# apparently, 
+# - If it is 'Tier 3' 'Grocery Store' - its Low
+
+# ### Implementing Imputation Concept 1 & 2:
+
+# In[59]:
+
+
+data2.isnull().sum()
+
+
+# In[60]:
+
+
+data2.head()
+
+
+# In[61]:
+
+
+def size_imputer(item):
+    size = item[0]
+    tier = item[1]
+    out_type = item[2]
+    sales = item[3]
     
-    #7. Checking the data types, exit if not proper types
-    X_train_type = type(X_train)
-    X_test_type = type(X_test)
-    y_train_type = type(y_train)
-    y_test_type = type(y_test)
-    if ((X_train_type != pd.DataFrame) & (X_test_type != pd.DataFrame) & (y_train_type != pd.Series) & (y_test_type != pd.Series)):
-        print(Fore.RED + '**** Please pass the data in expected format ****')
-        print('You passed the data in the following format:')
-        print('X_train type you passsed: ',X_train_type)
-        print('X_test type you passsed: ',X_test_type)
-        print('y_train type you passsed: ',y_train_type)
-        print('y_test type you passsed: ',y_test_type)
-        print(Fore.BLUE +'Expected Formats are: ')
-        print('X_train type: ',pd.DataFrame)
-        print('X_test type: ',pd.DataFrame)
-        print('y_train type: ',pd.Series)
-        print('y_test type: ',pd.Series)
-        return 'Exiting Method'
- 
-    #1. Getting R SquaredAdjusted R-Squared
-    print(Fore.BLUE + 'R Squared Score:')
-    train_rsq = regression_model.score(X_train,y_train)
-    test_rsq = regression_model.score(X_test,y_test)
-    print(Fore.BLACK + 'R Squared Score (Train Model): ',train_rsq.round(5))
-    print(Fore.BLACK + 'R Squared Score (Test Model): ',test_rsq.round(5))
-    print(" ")
-    
-    #2. Getting Adjusted R Squared
-    print(Fore.BLUE + 'Adjusted R Squared Score:')
-    train_adrsq = 1 - (1 - train_rsq) * (X_train.shape[0]-1)/(X_train.shape[0] - X_train.shape[1] - 1)
-    test_adrsq = 1 - (1 - test_rsq) * (X_test.shape[0]-1)/(X_test.shape[0] - X_test.shape[1] - 1)
-    print(Fore.BLACK + 'Adjusted R Squared (Train Model):', train_adrsq.round(5))
-    print(Fore.BLACK + 'Adjusted R Squared (Test Model):', test_adrsq.round(5))
-    print(' ')
-    
-    #8. Getting MAE and RMSE
-    print(Fore.BLUE + "Errors : ")
-    from sklearn import metrics
-    import numpy as np
-    y_pred = regression_model.predict(X_test)
-    print(Fore.BLACK + "Mean Absolute Error :", metrics.mean_absolute_error(y_test, y_pred))
-    print(Fore.BLACK + "Root Mean Squared Error :", np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
-    print('')
-    
-    #3. Getting Intercept
-    print(Fore.BLUE + "Bias / Intercept: ")
-    print(Fore.BLACK + "Intercept for the model: ",regression_model.intercept_.round(5))
-    print(' ')
-    
-    #=========== Getting & Creating the coefficient & p-values matrix =====================
-    #4. Getting Coefficients
-    print(Fore.BLUE + "Weights / Coefficients: ")
-    print(Style.RESET_ALL)
-    coefs = regression_model.coef_
-    coefs= coefs.reshape(-1,1)
-    coefs_df = pd.DataFrame(data=coefs.round(5), index=X_test.columns, columns=['Coefficients'])
-    
-    #5. Getting p-values of features
-    from sklearn.feature_selection import f_regression
-    X_all = pd.concat([X_train, X_test])
-    y_all = y_train.append(y_test)
-    p_values = f_regression(X_all,y_all)[1] 
-    
-    #Tried adding round off to 5 digits for p-value but it is not wotking, hence commented
-    #coefs_df = pd.concat([coefs_df,pd.DataFrame(p_values, index=X_test.columns, columns=['F-stat(p-value)']), 
-                          #pd.DataFrame(p_values.round(5), index=X_test.columns, columns=['round(p-value)']) ], axis=1)
-    coefs_df = pd.concat([coefs_df,pd.DataFrame(p_values, index=X_test.columns, columns=['F-stat(p-value)'])], axis=1)
-    
-    #6. Adding Significant Column
-    sig = []
-    for element in p_values:
-        if element.round(5) < 0.05:
-            sig.append('Yes')
+    if pd.isnull(size) :
+        if tier == 'Tier 3' :
+            if out_type == 'Grocery Store':
+                return 'Small'
+            elif out_type == 'Supermarket Type1':
+                return 'High'
+            else:
+                return 'Medium'
+        elif tier == 'Tier 2':
+            if out_type == 'Supermarket Type1':
+                if sales < 8479.6288 :
+                    return 'Small'
+                else:
+                    return 'Medium'
         else:
-            sig.append('No')
-    coefs_df = pd.concat([coefs_df, pd.DataFrame(sig, columns=['Significant'], index=X_test.columns)], axis=1)
-    print(coefs_df)
-    print(' ')
-    
-    
-    #===================================================================================================================
+            return size
+    else:
+        return size
+
+
+# In[62]:
+
+
+data3 = data2.copy()
+
+
+# In[63]:
+
+
+data3['Outlet_Size'] = data3[['Outlet_Size','Outlet_Location_Type','Outlet_Type','Item_Outlet_Sales']].apply(size_imputer, axis=1)
+
+
+# In[64]:
+
+
+data3.isnull().sum()
+
+
+# In[65]:
+
+
+data3[data3['Outlet_Size'].isnull()]
+
+
+# ### Hence we have now successfully imputer all the values
+
+# In[66]:
+
+
+data3.head()
+
+
+# In[67]:
+
+
+#sns.pairplot(data3)
+
+
+# In[68]:
+
+
+data4 = data3.copy()
+
+
+# In[98]:
+
+
+data4.isnull().sum()
+
+
+# In[69]:
+
+
+data4.head()
+
+
+# In[70]:
+
+
+fat_df = pd.get_dummies(data4['Item_Fat_Content'], drop_first=True, prefix='Item_Fat_Content')
+
+
+# In[71]:
+
+
+item_type_df = pd.get_dummies(data4['Item_Type'], drop_first=True, prefix='Item_Type')
+
+
+# In[72]:
+
+
+outlet_size_df = pd.get_dummies(data4['Outlet_Size'], drop_first=True, prefix='Outlet_Size')
+
+
+# In[75]:
+
+
+outlet_type_df = pd.get_dummies(data4['Outlet_Type'], drop_first=True, prefix='Outlet_Type')
+
+
+# In[79]:
+
+
+tier_df = pd.get_dummies(data4['Outlet_Location_Type'], drop_first=True)
+
+
+# In[80]:
+
+
+tier_df.head()
+
+
+# In[81]:
+
+
+data4.columns
+
+
+# In[99]:
+
+
+final_df = pd.concat([data4[['Item_Weight','Item_Visibility','Item_MRP','Item_Outlet_Sales']],fat_df,item_type_df,outlet_size_df,
+                     outlet_type_df,tier_df], axis=1)
+
+
+# In[100]:
+
+
+pd.set_option('display.max_columns', None)
+
+
+# In[101]:
+
+
+final_df.head()
+
+
+# In[102]:
+
+
+X = final_df.drop(['Item_Outlet_Sales'], axis=1)
+y = final_df['Item_Outlet_Sales']
+
+
+# In[103]:
+
+
+X.head()
+
+
+# In[104]:
+
+
+import statsmodels.api as sm
+
+
+# In[105]:
+
+
+x1 = sm.add_constant(X)
+
+
+# In[107]:
+
+
+results = sm.OLS(y,x1).fit()
+
+
+# In[109]:
+
+
+results.summary()
+
+
+# In[110]:
+
+
+x2 = x1[['const','Item_MRP','Outlet_Type_Supermarket Type1','Outlet_Type_Supermarket Type2','Outlet_Type_Supermarket Type3',
+        'Tier 2','Tier 3']]
+
+
+# In[111]:
+
+
+results2 = sm.OLS(y,x2).fit()
+
+
+# In[112]:
+
+
+results2.summary()
+
+
+# In[121]:
+
+
+from sklearn.svm import SVR
+
+
+# In[122]:
+
+
+svr = SVR()
+
+
+# In[123]:
+
+
+svr.fit(x1, y)
+
+
+# In[126]:
+
+
+svr.score(x1,y)
+
+
+# In[127]:
+
+
+from sklearn.ensemble import RandomForestRegressor
+
+
+# In[128]:
+
+
+rfr = RandomForestRegressor()
+
+
+# In[129]:
+
+
+rfr.fit(x1, y)
+
+
+# In[130]:
+
+
+rfr.score(x1,y)
+
+
+# In[ ]:
+
+
